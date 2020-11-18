@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var Car = function (make, model, year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    };
+    Car.prototype = {
+        constructor: Car,
+        getMake: function () {
+            return this.make;
+        },
+        getModel: function () {
+            return this.model;
+        },
+        getYear: function () {
+            return this.year;
+        }
+    };
+    var CarFactory = (function () {
+        var createCars = {};
+        return {
+            createCar: function (make, model, year) {
+                if (createCars[make+model+year]) {
+                        return createCars;
+                } else {
+                    var car = new Car(make, model, year);
+                    createCars[make+model+year]= car;
+                    return car;
+                }
+            }
+        }
+    })();
+    var CarrecordManager = (function () {
+        var carRecordDataBase = {};
+        return {
+            addCarRecord: function (make, model, year, owner, tag, renewDate) {
+                var car = CarFactory.createCar(make, model, year);
+                carRecordDataBase[tag] = {
+                    owner: owner,
+                    renewDate: renewDate,
+                    car: car
+                };
+                return carRecordDataBase[tag];
+            },
+            renewRegistration: function (newRenewDate) {
+                carRecordDataBase[tag].renewDate = newRenewDate;
+            }
+        }
+    })()
+
+    var arr = [];
+    var stime = new Date().getTime();
+    for (var i = 0; i < 5; i++) {
+        arr.push(CarrecordManager.addCarRecord('上海大众', '迈腾', '2012-2-3', 'vvv', 'bj001', '2013.4.1'))
+        // arr.push(CarrecordManager.addCarRecord('北京现代', '迈腾', '2012-2-3', 'xxx', 'cj001', '2013.4.1'))
+    }
+    var etime = new Date().getTime();
+  
+
+</script>
+
+</html>

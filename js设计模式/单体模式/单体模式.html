@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+//     var Ext = {};
+//     Ext.Base = (function () {
+//         var uniqInstance;
+//         function init() {
+//             var a1 = 10;
+//             var a2 = true;
+//             var fn = function () {
+//                 console.log('方法1');
+//             }
+//             return {
+//                 attr1:a1,
+//                 attr2:a2,
+//                 method:function(){
+//                    fn();
+//                 }
+//             }
+//         }
+//         return {
+//             getInstance: function () {
+//                 if (!uniqInstance) {
+//                     uniqInstance = init();
+//                 }
+//                 return uniqInstance
+//             }
+//         }
+//     })();
+// //    Ext.Base.getInstance().method();
+// console.log(Ext.Base);
+   
+   var Ext={};
+   var def=true;
+   Ext.More=(function(){
+       var obja={
+           type:'hh'
+       };
+       var objb={
+           type:'ie'
+       };
+       return function(){
+           if(def){
+               return obja;
+           }else{
+               return objb;
+           }
+       }
+   })();
+   console.log(Ext.More());
+   
+
+   
+</script>
+
+</html>

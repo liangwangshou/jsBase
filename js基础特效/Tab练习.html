@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Tab练习.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h4>
+        Js 面向对象 动态添加标签页
+    </h4>
+    <div class="tabsbox" id="tab">
+        <nav class="fisrstnav">
+            <ul>
+                <li class="liactive"><span>测试1</span><span class="iconfont icon-guanbi">x</span></li>
+                <li><span>测试2</span><span class="iconfont icon-guanbi">x</span></li>
+                <li><span>测试3</span><span class="iconfont icon-guanbi">x</span></li>
+            </ul>
+            <div class="tabadd">
+                <span>+</span>
+            </div>
+        </nav>
+        <div class="tabscon">
+            <section class="conactive">测试1</section>
+            <section>测试2</section>
+            <section>测试3</section>
+        </div>
+    </div>
+
+</body>
+<script>
+    var that;
+    var Tab = function () {
+        this.main = document.querySelector('.tabsbox');
+        this.add = this.main.querySelector('.tabadd');
+        this.ul = this.main.querySelector('ul');
+        this.sectionparent = this.main.querySelector('.tabscon');
+        that = this;
+        this.update();
+        this.t = 0;
+        this.add.addEventListener('click', this.toadd);
+    };
+    Tab.prototype = {
+        constructor: Tab,
+        update: function () {
+            this.lis = this.main.querySelectorAll('li');
+            this.sections = this.main.querySelectorAll('section');
+            this.minus = this.main.querySelectorAll('.iconfont');
+            this.spans = this.main.querySelectorAll('.fisrstnav li span:first-child');
+            for (var i = 0; i < this.lis.length; i++) {
+                this.lis[i].index = i;
+                this.lis[i].addEventListener('click', this.totab);
+                this.minus[i].addEventListener('click', this.toremove);
+                this.spans[i].addEventListener('dblclick',this.toedit);
+                this.sections[i].addEventListener('dblclick',this.toedit);
+            }
+        },
+        totab: function () {
+            that.clear();
+            this.className = 'liactive';
+            that.sections[this.index].className = 'conactive';
+        },
+        clear: function () {
+            for (var i = 0; i < this.lis.length; i++) {
+                this.lis[i].className = '';
+                this.sections[i].className = '';
+            }
+        },
+        toadd: function () {
+            that.clear();
+            that.t++;
+            var li = '<li class="liactive"><span>新测试' + that.t + '</span><span class="iconfont icon-guanbi">x</span></li>';
+            var section = '<section class="conactive">新测试' + that.t + '</section>';
+            that.ul.insertAdjacentHTML('beforeend', li);
+            that.sectionparent.insertAdjacentHTML('beforeend', section);
+            that.update();
+        },
+        toedit:function(){
+            window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+            var text=this.innerHTML;
+            this.innerHTML='<input type="text" >';
+            var input=this.children[0];
+            input.value=text;
+            input.select();
+            input.onblur=function(){
+                this.parentNode.innerHTML=this.value;
+            }
+            input.onkeyup=function(e){
+                if(e.keyCode==13){
+                    this.parentNode.innerHTML=this.value;
+                }
+            }
+        },
+        toremove: function (e) {
+            e.stopPropagation();
+            var index = this.parentNode.index;
+            that.lis[index].remove();
+            that.sections[index].remove();
+            that.update();
+            if (that.main.querySelector('.liactive')) {
+                return;
+            } else {
+                if (index != 0 && index != undefined) {
+                    index--;
+                }
+                that.lis[index].className = 'liactive';
+                that.sections[index].className = 'conactive';
+            }
+        }
+    }
+    var tab = new Tab();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // var that;
+    // var Tab = function () {
+    //     this.main = document.querySelector('.tabsbox');
+    //     this.add = this.main.querySelector('.tabadd');
+    //     this.ul = this.main.querySelector('ul');
+    //     this.sectionparent = this.main.querySelector('.tabscon');
+    //     this.add.addEventListener('click', this.addtab);
+    //     that = this;
+    //     this.t = 1;
+    //     this.update();
+    // }
+    // Tab.prototype = {
+    //     constructor: Tab,
+    //     totab: function () {
+    //         that.update();
+    //         that.clear();
+    //         this.className = 'liactive';
+    //         that.sections[this.index].className = 'conactive';
+    //     },
+    //     update: function () {
+    //         this.lis = this.main.querySelectorAll('li');
+    //         this.sections = this.main.querySelectorAll('section');
+    //         this.remove = this.main.querySelectorAll('.icon-guanbi');
+    //         this.spans = this.main.querySelectorAll('.fisrstnav li span:first-child');
+
+    //         for (var i = 0; i < this.lis.length; i++) {
+    //             this.lis[i].index = i;
+    //             this.lis[i].addEventListener('click', this.totab);
+    //             this.remove[i].addEventListener('click', this.toremove);
+    //             this.spans[i].addEventListener('dblclick', this.edit);
+    //             this.sections[i].addEventListener('dblclick',this.edit);
+    //         };
+    //     },
+    //     clear: function () {
+    //         for (var i = 0; i < this.lis.length; i++) {
+    //             this.lis[i].className = '';
+    //             this.sections[i].className = '';
+    //         }
+    //     },
+    //     toremove: function (e) {
+    //         e.stopPropagation();
+    //         var index = this.parentNode.index;
+    //         that.lis[index].remove();
+    //         that.sections[index].remove();
+    //         that.update();
+    //         if (document.querySelector('.liactive')) {
+    //             return;
+    //         }
+    //         if (index == 0 && that.lis[index] != undefined) {
+    //             that.lis[index].className = 'liactive';
+    //             that.sections[index].className = 'conactive';
+    //         } else {
+    //             index--;
+    //             if (that.lis[index]) {
+    //                 that.lis[index].className = 'liactive';
+    //                 that.sections[index].className = 'conactive';
+    //             }
+    //         }
+
+    //     },
+    //     edit: function () {
+    //         window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+    //         var str=this.innerHTML;
+    //         this.innerHTML='<input type="text">';
+    //         var input=this.children[0];
+    //         input.value=str;
+    //         input.select();
+    //         input.onblur=function(){
+    //             this.parentNode.innerHTML=this.value;
+    //         }
+    //         input.onkeyup=function(e){
+    //             if(e.keyCode=='13'){
+    //                 this.blur();
+    //             }
+    //         }
+    //     },
+    //     addtab: function () {
+    //         that.clear();
+    //         var random = Math.random();
+    //         // //////////////////////第一种添加方式(暂且不行)
+    //         // that.newli = document.createElement('li');
+    //         // that.newsection = document.createElement('section');
+    //         // that.newli.innerHTML = '<li class="liactive"><span>新标签' + that.t + '</span><span class="iconfont icon-guanbi">x</span></li>';
+    //         // that.newsection.innerHTML = ' <section class="conactive">' + random + '</section>';
+    //         // that.t += 1;
+    //         // that.ul.appendChild(that.newli);
+    //         // that.sectionparent.appendChild(that.newsection);
+    //         ///////////////////////第二种添加方式
+    //         var li = '<li class="liactive"><span>新标签' + that.t + '</span><span class="iconfont icon-guanbi">x</span></li>';
+    //         var section = ' <section class="conactive">' + random + '</section>';
+    //         that.t += 1;
+    //         that.ul.insertAdjacentHTML('beforeend', li);
+    //         that.sectionparent.insertAdjacentHTML("beforeend", section);
+    //         that.update();
+    //     }
+    // }
+
+    // var TabInstance = new Tab();
+    //****************************************************
+//     var Tab = function () {
+
+// this.main = document.querySelector('tabsbox');
+// this.lis = document.querySelectorAll('li');
+// this.sections = document.querySelectorAll('section');
+// for (var i = 0; i < this.lis.length; i++) {
+//     this.lis[i].index = i;
+//     // console.log(this.lis);
+//     this.lis[i].addEventListener('click', function () {
+//         TabInstance.clear();
+//         this.className = 'liactive';
+//         TabInstance.sections[this.index].className = 'conactive';
+//     })
+
+// };
+// }
+// Tab.prototype = {
+// constructor: Tab,
+// // totab: function () {
+// //     TabInstance.clear();
+// //     TabInstance.lis[i].className = 'liactive';
+// //     TabInstance.sections[index] = 'conactive';
+// // },
+// clear: function () {
+//     for (var i = 0; i < this.lis.length; i++) {
+//         this.lis[i].className = '';
+//         this.sections[i].className = '';
+//     }
+// }
+// }
+
+// var TabInstance = new Tab();
+</script>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var Person = function (name,skill) {
+        this.nextperson = null;
+        this.name=name;
+        this.skill = skill;
+        this.next = function (nextperson) {
+            this.nextperson = nextperson;
+        }
+    };
+   
+    var Worker = function (assign) {
+        this.assign = assign;
+    };
+    Worker.prototype = {
+        constructor: Worker,
+        dispute: function (object) {
+            console.log(object.skill,this.assign);
+            console.log(object);
+            
+           if (object.skill === this.assign) {
+                console.log(object.name + '可以做当前的任务');
+
+            } else {
+                arguments.callee.call(this,object.nextperson);
+            }
+        }
+    };
+    var person1 = new Person('liang','java');
+    var person2 = new Person('yu','html');
+    var person3 = new Person('tao','css');
+    person1.next(person2);
+    person2.next(person3);
+   var assign1 = new Worker('css');
+    assign1.dispute(person1);
+</script>
+
+</html>

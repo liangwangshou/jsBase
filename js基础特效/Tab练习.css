@@ -1,0 +1,47 @@
+li{
+    list-style-type: none;
+}
+h4{
+    text-align: center;
+}
+nav{
+    display: flex;
+    justify-content: space-around;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    display: flex;
+    
+}
+ul li{
+    /* cursor: pointer; */
+    cursor: default;
+}
+.tabadd{
+    color: red;
+    /* font-size: 30px; */
+    cursor: pointer;
+}
+.icon-guanbi{
+    margin-left: 10px;
+    margin-right: 20px;
+    color: black;
+    cursor: pointer;
+}
+/* .tabscon{
+    display: flex;
+    justify-content: center;
+} */
+.liactive{
+    background-color: red;
+
+}
+.conactive{
+    display: inline-block;
+}
+section{
+    display: none;
+}

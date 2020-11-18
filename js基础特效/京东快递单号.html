@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="whole">
+
+        <input type="text" placeholder="请输入你的快递单号" class="inputt">
+        <div class="box" style="width: 200px;border: 1px solid black;display: none;">123</div>
+    </div>
+    <script>
+        var box = document.querySelector('.box');
+        var inputt = document.querySelector('.inputt');
+        inputt.addEventListener('keyup', function () {
+            if (this.value == '') {
+                box.style.display = 'none';
+            } else {
+                box.style.display = 'block';
+                box.innerText = this.value;
+            }
+        })
+        inputt.addEventListener('blur', function () {
+            box.style.display = 'none';
+        })
+        inputt.addEventListener('focus', function () {
+            if (this.value == '') {
+                box.style.style = 'none';
+            }
+            else {
+                box.style.display = 'block';
+            }
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // inputt.addEventListener('keyup', function () {
+        //     if (this.value == '') {
+        //         box.style.display = 'none';
+        //     } else {
+        //        box.style.display = 'block';
+        //         box.innerText = this.value;
+        //     }
+        // });
+        // inputt.addEventListener('blur',function(){
+        //     box.style.display='none';
+        // });
+        // inputt.addEventListener('focus',function(){
+        //     if(this.value==''){
+        //         box.style.display='none';
+        //     }else{
+        //         box.style.display='block';
+        //     }
+        // });
+    </script>
+</body>
+
+
+</html>

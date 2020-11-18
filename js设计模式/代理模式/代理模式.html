@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var Book = function (id, title, author) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+    }
+    var Library = function (books) {
+        this.books = books;
+    };
+    Library.prototype = {
+        constructor: Library,
+        addbook: function (newbooks) {
+            
+                for (var key in newbooks) {
+                    this.books[key] = newbooks[key];
+                    console.log(this.books[key]);
+                    console.log(this.books,key);
+                }
+           
+
+        },
+        findbook: function (id) {
+            // //第一部分
+            // if (this.books.java.id === id) {
+            //     return this.books.java.id;
+            // } else if (this.books.js.id === id) {
+            //     return this.books.js.id;
+            // };
+            // return null;
+
+            // //第二部分  会报错误
+            // if (this.books[java].id === id) {
+            //     return this.books[java].id;
+            // } else if (this.books[js].id === id) {
+            //     return this.books[js].id;
+            // };
+            // return null;
+
+            // 第三部分
+            for (var key in this.books) {
+                if (this.books[key].id == id) {
+                    return this.books[key].id;
+                }
+            }
+
+            //第四部分 会报错
+            // for (var key in this.books) {
+            //     if (this.books.key.id == id) {
+            //         return this.books.key.id;
+            //     }
+            // }
+        }
+
+    };
+    var proxy = function (books) {
+        this.books = books;
+        this.Library = null;
+    }
+    proxy.prototype = {
+        constructor: proxy,
+        initial: function () {
+            if (this.Library == null) {
+                this.Library = new Library(this.books);
+            }
+        },
+        addbook: function (newbooks) {
+            this.initial();
+            this.Library.addbook(newbooks);
+        },
+        findbook: function (id) {
+            this.initial();
+            return this.Library.findbook(id);
+        },
+    }
+    var proxyinstance = new proxy({
+        java: new Book('01', 'java', 'liang'),
+        js: new Book('02', 'js', 'zhang')
+    });
+    var html = new Book('03', 'html', 'yutao');
+    var css = new Book('04', 'css', 'yanling');
+    var ajax = new Book('05', 'ajax', 'love');
+    proxyinstance.addbook({ html, css });
+    // proxyinstance.addbook(ajax);
+    console.log(proxyinstance.findbook('04'));
+
+    // var proxyinstance=new proxy({
+    //     '01':new Book ('01','java','liang'),
+    //     '02':new Book ('02','js','zhang')
+    // });
+    // var book1=new Book ('01','java','liang')
+    // var book2=new Book ('02','js','zhang');
+
+    // var proxyinstance=new proxy([book1,book2]); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

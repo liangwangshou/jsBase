@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 400px;
+            height: 400px;
+            background-color: bisque;
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div></div>
+    <span class="c1">800</span>
+    <span class="c2">500</span>
+</body>
+<script>
+    var div = document.querySelector('div');
+    var span1 = document.querySelector('.c1');
+    var span2 = document.querySelector('.c2');
+    var move = function (obj, target, callback) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+            if (target == obj.offsetLeft) {
+                clearInterval(obj.timer);
+                if (callback) {
+                    callback();
+                }
+            }
+            var step = (target - obj.offsetLeft) / 10;
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            obj.style.left = obj.offsetLeft + step + 'px';
+        }, 35)
+    };
+    span1.addEventListener('click', function () {
+        move(div, 800, function () { })
+    });
+    span2.addEventListener('click', function () {
+        move(div, 500, function () { })
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // span1.addEventListener('click', function () {
+    //     move(div, 800, function () {
+    //         div.style.backgroundColor = 'orange';
+
+    //     });
+    // })
+    // span2.addEventListener('click', function () {
+    //     move(div, 500, function () {
+    //         div.style.backgroundColor = 'orange';
+
+    //     });
+    // })
+    // var move = function (obj, target, callback) {
+    //     clearInterval(obj.time);
+    //     obj.time = setInterval(function () {
+    //         if (div.offsetLeft == target) {
+    //             clearInterval(obj.time);
+    //             if (callback) {
+    //                 callback();
+    //             }
+    //         }
+    //         var step = (target - obj.offsetLeft) / 10 > 0 ? Math.ceil((target - obj.offsetLeft) / 10) : Math.floor((target - obj.offsetLeft) / 10)
+    //         obj.style.left = obj.offsetLeft + step + 'px';
+    //     }, 50)
+    // }
+</script>
+
+</html>

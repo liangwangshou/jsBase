@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function Carshop() { };
+    Carshop.prototype = {
+        constructor: Carshop,
+        sellcar: function (type) {
+
+            var car = carfactory.createcar(type);
+            return car;
+        }
+
+    }
+    var carfactory = {
+        createcar: function (type) {
+            var car;
+            switch (type) {
+                case 'baoma': car = new baoma(); break;
+                case 'benchi': car = new benchi(); break;
+
+            }
+
+        }
+    }
+    function basecar() { };
+    basecar.prototype = {
+        constructor: basecar,
+        start: function () {
+            console.log('start');
+        },
+        run: function () {
+            console.log('run');
+        }
+    }
+    function baoma() { };
+    baoma.prototype = new basecar();
+    function benchi() { };
+    benchi.prototype = new basecar();
+    var shop = new Carshop();
+    var car =shop.sellcar('benchi');
+  
+    
+</script>
+
+</html>

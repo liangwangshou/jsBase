@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var interface = function (obj, methods) {
+        this.methods = [];
+        this.obj = obj;
+        for (var i = 0; i < methods.length; i++) {
+            if (typeof methods[i] == 'string') {
+                this.methods.push(methods[i]);
+            }
+        }
+    }
+    var if1 = new interface('if1', ['add', 'remove']);
+    var if2 = new interface('if2', ['update', 'modify']);
+    var implement = function () { };
+    implement.prototype = {
+        constructor: implement,
+        add: function () {
+            console.log('add');
+        },
+        remove: function () {
+            console.log('remove');
+        },
+        update: function () {
+            console.log('update');
+        },
+        modify: function () {
+            console.log('modify');
+        }
+    }
+    interface.check = function (obj) {
+        for (var i = 1; i < arguments.length; i++) {
+            var methodName = arguments[i].methods;
+            for (var j = 0; j < methodName.length; j++) {
+                if (!obj[methodName[j]] || typeof obj[methodName[j]] !== 'function') {
+                    console.log('error!!!');
+                } else {
+                    console.log('success!!!');
+                }
+            }
+        }
+    }
+    var imple1 = new implement();
+    interface.check(imple1, if1, if2);
+
+</script>
+
+</html>

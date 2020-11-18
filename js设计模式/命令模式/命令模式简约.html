@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="mydiv"></div>
+</body>
+<script>
+    var MoveUp = function (cursor) {
+        this.cursor = cursor;
+    };
+    MoveUp.prototype = {
+        constructor: MoveUp,
+        execute: function () {
+            this.cursor.move(0,10)
+        },
+        undo: function () {
+            this.cursor.move(0,-10)
+        }
+    }
+    // var Cursor = function (width, heigth, parent) {
+    //     this.width = width;
+    //     this.heigth = heigth;
+    //     this.position = {
+    //         x: width / 2,
+    //         y: heigth / 2,
+    //     };
+    //     this.canvas = document.createElement('canvas');
+    //     this.canvas.heigth = this.heigth;
+    //     this.canvas.width = this.width;
+    //     parent.appendChild(this.canvas);
+    //     this.ctx = this.canvas.getContext('2d');
+    //     this.ctx.fillStyle = 'red';//填充颜色
+    //     this.move(0, 0);
+    // }
+    // Cursor.prototype = {
+    //     constructor: Cursor,
+    //     move: function (x, y) {
+    //         this.position.x += x;
+    //         this.position.y += y;
+    //         this.ctx.clearRect(0, 0, this.width, this.heigth);
+    //         this.ctx.fillRect(this.position.x, this.position.y, 20, 20);
+    //     }
+    // }
+    var Cursor = function ( parent) {
+       
+        this.movediv = document.createElement('div');
+        var styleinstance = {
+            width: '140px',
+            height: '140px',
+            position: 'absolute',
+            left: '40px',
+            top: '40px',
+            background: 'green'
+        }
+        for (var key in styleinstance) {
+            this.movediv.style[key] = styleinstance[key];
+        };
+        // this.movediv.style.width = this.width ;
+        // this.movediv.style.heigth = this.heigth ;
+        // this.movediv.style.border='1px solid black';
+        parent.appendChild(this.movediv);
+    }
+    Cursor.prototype = {
+        constructor: Cursor,
+        move: function (x, y) {
+            this.movediv.style.left=parseInt(this.movediv.style.left)+x+'px';
+           this.movediv.style.top=parseInt(this.movediv.style.top)+y+'px';
+        }
+    }
+
+    var UndoDercorator = function (command, undoStack) {
+        this.command = command;
+        this.undoStack = undoStack;
+    };
+    UndoDercorator.prototype = {
+        constructor: UndoDercorator,
+        execute: function () {
+            this.undoStack.push(this.command);
+            this.command.execute();
+        },
+        undo: function () {
+            this.command.undo();
+        }
+    }
+    var CommanButton = function (label, command, parent) {
+        this.element = document.createElement('button');
+        this.element.innerHTML = label;
+        parent.appendChild(this.element);
+        this.element.onclick = function () {
+            command.execute();
+        }
+    }
+    var UndoButton = function (label, command, parent) {
+        this.element = document.createElement('button');
+        this.element.innerHTML = label;
+        parent.appendChild(this.element);
+        this.element.onclick = function () {
+            if (command.length == 0) {
+                alert('最后一条命令了');
+                return;
+            }
+            var lastCommand = command.pop();
+            lastCommand.undo();
+        }
+    }
+    window.onload = function () {
+        //接收者对象实例化出来了
+        var mydiv = document.getElementById('mydiv');
+        var cursor = new Cursor( mydiv);
+
+
+        var undoStack = [];//命令集合
+        var commandInstance = new MoveUp(cursor);
+        var upCommand = new UndoDercorator(commandInstance, undoStack);
+
+        var upbtn = new CommanButton('up', upCommand, mydiv);
+        var undobtn = new UndoButton('undo', undoStack, mydiv);
+    }
+</script>
+
+
+
+</html>

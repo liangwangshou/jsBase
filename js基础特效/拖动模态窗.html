@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .login {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 300px;
+            border: 1px black solid;
+            display: none;
+            background-color: white;
+        }
+
+        .login div {
+            text-align: center;
+            /* display: inline-block; */
+            height: 50px;
+            align-content: center;
+            vertical-align: middle;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .onlogin {
+            cursor: pointer;
+        }
+
+        /* body {
+            background-color: white;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="onlogin">登录</div>
+    <div class="login">
+        <div>请登录</div>
+        <span>关闭</span>
+        <input type="text" placeholder="请输入用户名">
+        <input type="password" placeholder="请输入密码">
+    </div>
+
+</body>
+<script>
+    var onlogin = document.querySelector('.onlogin');
+    var login = document.querySelector('.login');
+    var body = document.querySelector('body');
+    var closes = document.querySelector('.login span:nth-child(2)');
+    var title = document.querySelector('.login div');
+    onlogin.addEventListener('click', function () {
+        login.style.display = 'block';
+        body.style.backgroundColor = 'gray';
+    })
+    closes.addEventListener('click', function () {
+        login.style.display = 'none';
+        body.style.backgroundColor = '';
+    })
+    title.addEventListener('mousedown', function (e) {
+        var startx = e.pageX - login.offsetLeft;
+        var starty = e.pageY - login.offsetTop;
+        title.addEventListener('mousemove', a);
+        function a(e) {
+            movex = e.pageX - startx;
+            movey = e.pageY - starty;
+            login.style.left = movex + 'px';
+            login.style.top = movey + 'px';
+        }
+        title.addEventListener('mouseup', function () {
+            title.removeEventListener('mousemove', a);
+        })
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // onlogin.addEventListener('click', function () {
+    //     body.style.backgroundColor = 'gray';
+    //     login.style.display = 'block';
+    // });
+    // closes.addEventListener('click', function () {
+    //     body.style.backgroundColor = '';
+    //     login.style.display = 'none';
+    // });
+
+    // title.addEventListener('mousedown', function (e) {
+    //     var x = e.pageX - login.offsetLeft;
+    //     var y = e.pageY - login.offsetTop;
+    //     document.addEventListener('mousemove', a);
+    //     function a(e) {
+    //         login.style.left = e.pageX - x + 'px';
+    //         login.style.top = e.pageY - y + 'px';
+    //     }
+    //     title.addEventListener('mouseup', function () {
+    //         document.removeEventListener('mousemove', a);
+    //     })
+    // });
+
+
+</script>
+
+</html>

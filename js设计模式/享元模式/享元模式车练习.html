@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var car = function (make, model, year) {
+        this.car = car;
+        this.model = model;
+        this.year = year;
+    };
+    car.prototype = {
+        constructor: car,
+        getcar: function () {
+            return this.car;
+        },
+        getmodel: function () {
+            return this.model;
+        },
+        getyear: function () {
+            return this.year;
+        }
+    };
+    var carFactory = (function () {
+        var basecar = {};
+        return {
+            createcar: function (make, model, year) {
+                if (basecar[make + model + year]) {
+
+                    return basecar[make + model + year];
+                } else {
+                    var carr = new car(make, model, year);
+                    basecar[make + model + year] = carr;
+
+                    return basecar[make + model + year];
+                }
+            }
+        }
+    })();
+    var manager = (function () {
+        var databas = {};
+        return {
+            add: function (make, model, year, owner, tag, renewDate) {
+                var car = carFactory.createcar(make, model, year);
+                databas[tag] = {
+                    owner: owner,
+                    renewDate: renewDate,
+                    car: car
+                };
+                    console.log( databas);
+            },
+            update: function (newrenewDate) {
+                databas[tag].renewDate = newrenewDate;
+            }
+        }
+    })();
+    var arr = [];
+    
+        arr.push(manager.add('上海大众', '大众', '2012-2-3', 'vvv', 'bj001', '2013.4.1'));
+        arr.push(manager.add('北京现代', '现代', '2012-1-1', 'xxx', 'cj001', '2013.4.1'));
+        arr.push(manager.add('劳斯莱斯', '贵族', '2012-12-12', 'zzz', 'dj001', '2013.4.1'))
+    
+
+</script>
+
+</html>

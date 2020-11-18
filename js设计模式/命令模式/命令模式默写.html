@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="mydiv" style="width: 500px;height: 500px;border: 2px solid black;"></div>
+</body>
+<script>
+    //******************************************************第二次练习*************************************************************************
+    var Cursor = function (parent) {
+        this.element = document.createElement('div');
+        this.cssDec = {
+            width: '400px',
+            height: '400px',
+            position: 'absolute',
+            left: '100px',
+            top: '100px',
+            backgroundColor: 'black'
+        };
+        for (var t in this.cssDec) {
+            this.element.style[t] = this.cssDec[t];
+        };
+        parent.appendChild(this.element);
+    };
+    Cursor.prototype = {
+        constructor: Cursor,
+        move: function (x, y) {
+            this.element.style.left = parseInt(this.element.style.left) + x + 'px';
+            this.element.style.top = parseInt(this.element.style.top) + y + 'px';
+        }
+    };
+    var Upcommand = function (obj) {
+        this.obj = obj;
+    };
+    Upcommand.prototype = {
+        constructor: Upcommand,
+        execute: function () {
+            this.obj.move(0, -10);
+        }
+    };
+    var Downcommand = function (obj) {
+        this.obj = obj;
+    };
+    Downcommand.prototype = {
+        constructor: Downcommand,
+        execute: function () {
+            this.obj.move(0, 10);
+        }
+    };
+    var Leftcommand = function (obj) {
+        this.obj = obj;
+    };
+    Leftcommand.prototype = {
+        constructor: Leftcommand,
+        execute: function () {
+            this.obj.move(-10, 0);
+        }
+    };
+    var Rightcommand = function (obj) {
+        this.obj = obj;
+    };
+    Rightcommand.prototype = {
+        constructor: Rightcommand,
+        execute: function () {
+            this.obj.move(10, 0);
+        }
+    };
+    var Buttoncommand = function (parent, label, commandObj) {
+        this.btn = document.createElement('button');
+        this.btn.innerHTML = label;
+        parent.appendChild(this.btn);
+        this.btn.onclick = function () {
+            commandObj.execute();
+        }
+    }
+
+
+
+    var mydiv = document.getElementById('mydiv');
+    var cursor1 = new Cursor(mydiv);
+    var commandStack=[];
+    var up = new Buttoncommand(mydiv, 'up', new Upcommand(cursor1));
+    var down = new Buttoncommand(mydiv, 'down', new Downcommand(cursor1));
+    var left = new Buttoncommand(mydiv, 'left', new Leftcommand(cursor1));
+    var right = new Buttoncommand(mydiv, 'right', new Rightcommand(cursor1));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //******************************************************第一次练习*************************************************************************
+
+    // // 接受者  有方法 但是是从命令来调用的
+    // var recepter = function (parent) {
+
+    //     this.css = {
+    //         position: 'absolute',
+    //         left: '100px',
+    //         top: '100px',
+    //         background: 'red',
+    //         width: '50px',
+    //         height: '50px'
+    //     };
+    //     this.childdiv = document.createElement('div');
+    //     for (var key in this.css) {
+    //         this.childdiv.style[key] = this.css[key];
+    //     }
+    //     parent.appendChild(this.childdiv);
+    // };
+    // recepter.prototype = {
+    //     constructor: recepter,
+    //     move: function (x, y) {
+    //         this.childdiv.style.left = parseInt(this.childdiv.style.left) + x + 'px';
+    //         this.childdiv.style.top = parseInt(this.childdiv.style.top) + y + 'px';
+    //     },
+    // };
+    // // 命令
+
+    // var MoveDown = function (recept) {
+    //     this.recept = recept;
+    // };
+    // MoveDown.prototype = {
+    //     constructor: MoveDown,
+    //     execute: function () {
+    //         this.recept.move(0, 10);
+    //     },
+    //     undo: function () {
+    //         this.recept.move(0, -10);
+    //     }
+    // };
+    // var MoveLeft = function (recept) {
+    //     this.recept = recept;
+    // };
+    // MoveLeft.prototype = {
+    //     constructor: MoveLeft,
+    //     execute: function () {
+    //         this.recept.move(-10, 0);
+    //     },
+    //     undo: function () {
+    //         this.recept.move(10, 0);
+    //     }
+    // };
+    // var MoveRight = function (recept) {
+    //     this.recept = recept;
+    // };
+    // MoveRight.prototype = {
+    //     constructor: MoveRight,
+    //     execute: function () {
+    //         this.recept.move(10, 0);
+    //     },
+    //     undo: function () {
+    //         this.recept.move(-10, 0);
+    //     }
+    // };
+    // var MoveUp = function (recept) {
+    //     this.recept = recept;
+    // };
+    // MoveUp.prototype = {
+    //     constructor: MoveUp,
+    //     execute: function () {
+    //         this.recept.move(0, -10);
+    //     },
+    //     undo: function () {
+    //         this.recept.move(0, 10);
+    //     }
+    // };
+    // // 装饰者 装饰命令  主要多修饰添加一个命令集合 用于以后的撤回操作
+    // var Decorater = function (command, withDrawArray) {
+    //     this.command = command;
+    //     this.withDrawArray = withDrawArray;
+    // };
+    // Decorater.prototype = {
+    //     constructor: Decorater,
+    //     execute: function () {
+    //         this.withDrawArray.push(this.command);
+    //         this.command.execute();
+    //     },
+    //     undo: function () {
+    //         this.command.undo();
+    //     }
+    // };
+    // //向body中的div中添加按钮  对按钮添加点击事件 用于调用方法
+    // var buttonMove = function (label, parent, command) {
+    //     this.addButton = document.createElement('button');
+    //     this.addButton.innerHTML = label;
+    //     parent.appendChild(this.addButton);
+    //     this.addButton.onclick = function () {
+    //         command.execute();
+    //     }
+    // };
+    // var buttonWithdraw = function (label, parent, withDrawArray) {
+    //     this.addButton = document.createElement('button');
+    //     this.addButton.innerHTML = label;
+    //     parent.appendChild(this.addButton);
+    //     this.addButton.onclick = function () {
+    //         if (withDrawArray.length == 0) {
+    //             alert('最后一条命令了');
+    //             return;
+    //         }
+    //         var lastCommand = withDrawArray.pop();
+    //         lastCommand.undo();
+    //     }
+    // };
+    // var mydiv = document.getElementById('mydiv');
+    // var recepte = new recepter(mydiv);
+    // var withDrawArray = [];
+    // var upbtn = new Decorater(new MoveUp(recepte), withDrawArray);
+    // var downbtn = new Decorater(new MoveDown(recepte), withDrawArray);
+    // var leftbtn = new Decorater(new MoveLeft(recepte), withDrawArray);
+    // var rightbtn = new Decorater(new MoveRight(recepte), withDrawArray);
+
+    // var buttonmoveUp = new buttonMove('Up', mydiv, upbtn);
+    // var buttonmoveDown = new buttonMove('Down', mydiv, downbtn);
+    // var buttonmoveLeft = new buttonMove('Left', mydiv, leftbtn);
+    // var buttonmoveRight = new buttonMove('Right', mydiv, rightbtn);
+    // var buttonmoveUndo = new buttonWithdraw('Undo', mydiv, withDrawArray);
+
+</script>
+
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>responsbility</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var worker = function () {
+        this.next = null;
+        this.setnext = function (nextone) {
+            this.next = nextone;
+        }
+    }
+    var x = function () { };
+    x.prototype = new worker();
+    x.prototype.fliter = function (money) {
+        if (money <= 10000) {
+            console.log('x可以处理');
+
+        } else {
+            if (this.next) {
+                this.next.fliter(money)
+            }
+        }
+    }
+    var y = function () { };
+    y.prototype = new worker();
+    y.prototype.fliter = function (money) {
+        if (money <= 20000) {
+            console.log('y可以处理');
+
+        } else {
+            if (this.next) {
+                this.next.fliter(money)
+            }
+        }
+    }
+    var z = function () { };
+    z.prototype = new worker();
+    z.prototype.fliter = function (money) {
+        console.log('z处理');
+        
+    }
+    function Client() {
+        var cgb = new x();
+        var zjl = new y();
+        var dsz = new z();
+        cgb.setnext(zjl);
+        zjl.setnext(dsz);
+
+        cgb.fliter(800000);
+    }
+Client();
+
+
+
+
+// function Handler() {
+//     this.next = null;
+//     this.setNext = function(_handler) {
+//         this.next = _handler;
+//     };
+
+//     this.handleRequest = function(money) {
+
+//     }
+// };
+
+// //采购部
+// function CGBHandler = function() {}
+// CGBHandler.prototype = new Handler();
+// CGBHandler.prototype.handleRequest = function(money) {
+//      //处理权限最多10000
+//     if (money < 10000){
+//         console.log('同意');
+//     } else {
+//         console.log('金额太大，只能处理一万以内的采购');
+//         if (this.next) {
+//             this.next.handleRequest(money);
+//         }
+//     }
+// };
+
+// //总经理
+// function ZJLHandler = function() {}
+// ZJLHandler .prototype = new Handler();
+// ZJLHandler .prototype.handleRequest = function(money) {
+//      //处理权限最多100000
+//     if (money < 100000){
+//         console.log('10万以内的同意');
+//     } else {
+//         console.log('金额太大，只能处理十万以内的采购');
+//         if (this.next) {
+//             this.next.handleRequest(money);
+//         }
+//     }
+// };
+
+// //董事长
+// function DSZHandler = function() {}
+// DSZHandler .prototype = new Handler();
+// DSZHandler .prototype.handleRequest = function(money) {
+//      //处理权限至少100000
+//     if (money >= 100000){
+//         console.log('10万以上的我来处理');
+//         //处理其他逻辑
+//     } 
+// };
+
+    var work = function (work) {
+        this.work = work;
+    }
+    var Task = function (task) {
+        this.task = task;
+    }
+    Task.prototype = {
+        constructor: Task,
+        fliter: function (success) {
+            if (this.task === success.skill) {
+                return success.todo();
+            } else {
+                arguments.callee.call(this, success.trans);
+
+            }
+        }
+    }
+    function exe(name, skill) {
+        this.name = name;
+        this.skill = skill;
+        this.trans = null;
+    }
+    exe.prototype = {
+        constructor: exe,
+        todo: function () {
+            console.log('这件事负责人是' + this.name);
+        },
+        deliver: function (x) {
+            this.trans = x;
+        }
+    }
+    e1 = new exe('a', 'java');
+    e2 = new exe('b', 'html');
+    e3 = new exe('c', 'css');
+    e1.deliver(e2);
+    e2.deliver(e3);
+    // var assign = new work('css');
+    var accept = new Task('css');
+    accept.fliter(e1);
+
+
+
+
+    // function hander(money) {
+    //     this.money = money;
+    //     this.deliver = null;
+    // };
+    // hander.prototype = {
+    //     delive: function (person) {
+    //         this.deliver = person;
+    //     }
+
+    // }
+    // function worker() { };
+
+    // worker.prototype = {
+    //     fliter: function (exe) {
+    //         if (this.money < 10000) {
+    //             console.log(exe + '能够处理');
+    //         } else {
+    //             // this.deliver.fliter(money);
+    //             arguments.callee.call(this, exe.deliver)
+    //         }
+    //     }
+    // }
+    // function abc(money) {
+    //     this.money = money;
+    //     this.deliver = null;
+    // }
+    // abc.prototype = {
+    //     delive: function (person) {
+    //         this.deliver = person;
+    //     }
+    // }
+
+    // var e1 = new abc(333333333);
+    // var e2 = new abc(333333333);
+    // var e3 = new abc(333333333);
+    // e1.delive(e2);
+    // e2.delive(e3);
+    // var wo = new worker();
+    // wo.fliter(e1);
+    // function manerager() { };
+    // manerager.prototype = new hander();
+    // manerager.prototype.fliter = function (money) {
+    //     if (money < 20000) {
+    //         console.log('maneragerr能够处理');
+    //     } else {
+    //         this.deliver.fliter(money);
+    //     }
+    // }
+    // function boss() { };
+    // boss.prototype = new hander();
+    // boss.prototype.fliter = function (money) {
+    //     console.log('boss处理');
+
+    // }
+
+
+</script>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var Car = function (car) {
+        this.car = car;
+    }
+    Car.prototype = {
+        constructor: Car,
+        getPrice: function () {
+            return 20000;
+        },
+        assemble: function () {
+            document.write('组装车');
+        }
+    }
+    var LightDecorator = function (car) {
+        this.car = car;
+    };
+    LightDecorator.prototype = new Car();
+    LightDecorator.prototype = {
+        constructor: LightDecorator,
+        getPrice: function () {
+            // console.log(this.car);
+
+            return this.car.getPrice()+10000;
+        },
+        assemble: function () {
+            document.write('组装车灯');
+        }
+    }
+    var iceDecorator = function (car) {
+        this.car = car;
+    };
+    iceDecorator.prototype = new Car();
+    iceDecorator.prototype = {
+        constructor: iceDecorator,
+        getPrice: function () {
+            // console.log(this.car);
+
+            return this.car.getPrice()+20000;
+        },
+        assemble: function () {
+            document.write('组装冰箱');
+        }
+    }
+    var car =new Car('k');
+    console.log(car.getPrice());
+    car.assemble();
+    car=new LightDecorator(car);
+    console.log(car.getPrice());
+    car.assemble();
+    car=new iceDecorator(car);
+    console.log(car.getPrice());
+    car.assemble();
+
+
+
+
+
+
+    
+    var Wear = function () { }
+    Wear.prototype.puton = function () {
+        console.log('穿上衬衫');
+    }
+    var tieDecorator = function (wear) {
+        this.wear = wear;
+    };
+    tieDecorator.prototype = {
+        constructor: tieDecorator,
+        puton: function () {
+            this.wear.puton();
+            console.log('穿上领带');
+        }
+    }
+    var westernDecorator = function (wear) {
+        this.wear = wear;
+    };
+    westernDecorator.prototype = {
+        constructor: westernDecorator,
+        puton: function () {
+            this.wear.puton();
+            console.log('穿上西装');
+        }
+    }
+    var wear=new Wear();
+    wear.puton();
+    wear=new tieDecorator(wear);
+    wear.puton();
+    wear=new westernDecorator(wear);
+    wear.puton();
+</script>
+
+</html>

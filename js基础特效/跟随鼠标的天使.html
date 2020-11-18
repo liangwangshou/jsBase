@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 20px;
+            height: 20px;
+        }
+        div{
+            height: 800px;
+            width: 800px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="img/图层3.png" alt="">
+    <div></div>
+</body>
+<script>
+    var div=document.querySelector('div');
+    var img=document.querySelector('img');
+    var x,y;
+    div.addEventListener('mousemove',function(e){
+         x= e.pageX;
+         y=e.pageY;
+        img.style.left=x-img.offsetWidth/2+'px';
+        img.style.top=y-img.offsetHeight/2+'px';
+    })
+</script>
+
+</html>

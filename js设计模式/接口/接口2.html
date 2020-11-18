@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+
+    var Interface = function (name, methods) {
+        this.name = name;
+        this.methods = [];
+        for (var i = 0; i < methods.length; i++) {
+            this.methods.push(methods[i]);
+        }
+    }
+
+    Interface.prototype.ensure = function (object) {
+        for (var i = 1; i < arguments.length; i++) {
+            var nodename = arguments[i].methods;
+            for (var j = 0; j < nodename.length; j++) {
+                if (!object[nodename[j]] || typeof object[nodename[j]] !== 'function') {
+                    console.log('mistakes');
+                }else{
+                    console.log('success!!!');
+                }
+            }
+        }
+    }
+    var interfaceCar1 = new Interface('interfaceCar1', ['run', 'remove', 'update', 'select']);
+    // var interface2 = new Interface('interface2', ['update', 'select']);
+    var Car = function (name) {
+        this.name = name;
+        this.implementsInterfaces = ['interface1'];
+    };
+    Car.prototype = {
+        constructor: Car,
+        run: function () {
+            console.log('run...');
+
+        },
+        remove: function () {
+            console.log('remove...');
+
+        },
+        update: function () {
+            console.log('update...');
+
+        },
+        select: function () {
+            console.log('select...');
+
+        }
+    };
+
+    var car1 = new Car('liang');
+    interfaceCar1.ensure(car1, interfaceCar1);
+    
+    // Interface.ensure = function (object) {
+    //     for (var i = 1, len = arguments.length; i < len; i++) {
+    //         var instance = arguments[i];
+    //         for (var j = 0; j < instance.methods.length; j++) {
+    //             var methodName = instance.methods[j];
+    //             if (!object[methodName] || typeof object[methodName] !== 'function') {
+    //                 console.log('the method name' + methodName + 'is not found!');
+
+    //             }
+    //         }
+    //     }
+    // }
+
+
+    // var Interface = function (name, methods) {
+    //     this.name = name;
+    //     this.methods = [];
+    //     for (var i = 0, len = methods.length; i < len; i++) {
+    //         this.methods.push(methods[i]);
+    //     }
+    // }
+    // var FirstInterface = new Interface('CompositeInterface', ['add', 'remove']);
+    // var SecondInterface = new Interface('FormItemInterface', ['update', 'select']);
+    // var Real = function () { };
+    // Real.prototype = {
+    //     constructor: Real,
+    //     add: function (obj) {
+    //         console.log('add...');
+    //     },
+    //     remove: function (obj) {
+    //         console.log('remove..');
+    //     },
+    //     update: function (obj) {
+    //         console.log('update..');
+    //     },
+    //     select: function (obj) {
+    //         console.log('select...');
+    //     }
+    // }
+    // Interface.ensureImplements = function (object) {
+    //     for (var i = 1, len = arguments.length; i < len; i++) {
+    //         var instance = arguments[i];
+    //         for (var j = 0; j < instance.methods.length; j++) {
+    //             var methodName = instance.methods[j];
+    //             if (!object[methodName] || typeof object[methodName] !== 'function') {
+    //                 console.log('the method name' + methodName + 'is not found!');
+
+    //             }
+    //         }
+    //     }
+    // }
+    // var obj = new Real();
+    // Interface.ensureImplements(obj, FirstInterface, SecondInterface);
+    // obj.add();
+    // console.log(Interface.ensureImplements);
+
+    //接口类，用来创建接口
+    // var Interface = function (name, motheds) {
+    //     if (arguments.length != 2) {
+    //         throw new Error("Interface constructor called with " + arguments.length + "arguments,but expected exactly 2");
+    //     }
+    //     this.name = name;
+    //     this.methods = [];
+    //     for (var i = 0; i < motheds.length; i++) {
+    //         if (typeof motheds[i] !== 'string') {
+    //             throw new Error('Interface constructor expects mothed names to be' + 'passes in as a string');
+    //         }
+    //         this.methods.push(motheds[i]);
+    //     }
+    // }
+    // Interface.prototype.ensureImplements = function (objs) {
+    //     if (arguments.length != 1) {
+    //         throw new Error("Interface constructor called with " + arguments.length + "arguments,but expected exactly 1")
+    //     }
+    //     for (var i = 0; i < objs.length; i++) {
+    //         var obj = objs[i];
+    //         console.log(obj.methods);
+    //        for (var j = 0; j < obj.methods.length; j++) {
+    //             var mothed = obj.methods[j];
+    //             if (!obj[mothed] || !typeof obj[mothed] !== 'function') {
+    //                 throw new Error('Function Interface.ensureImplements:implements interface' + obj.name + ',obj.mothed' + mothed + 'was not found');
+    //             }
+    //         }
+    //     }
+    // }
+    // //创建接口
+    // var People = new Interface('People', ['createHead', 'createBody']);
+    // //子类
+    // var Woman = function (name) {
+    //     this.name = name;
+    //     this.implementsInterfaces = ['People'];
+    // }
+    // Woman.prototype.showName = function () {
+    //     alert(this.name);
+    // }
+    // Woman.prototype.createBody = function () {  //实现必要的方法
+    //     alert("女人身体已经创建好");
+    // }
+    // Woman.prototype.createHead = function () {
+    //     alert("女人头部已经创建好");
+    // }
+    // //子类
+    // var Man = function (name) {
+    //     this.name = name;
+    //     this.implementsInterfaces = ['People'];
+    // }
+    // Man.prototype.showName = function () {
+    //     alert(this.name);
+    // }
+    // Man.prototype.createBody = function () {  //实现必要的方法
+    //     alert("男人身体已经创建好");
+    // }
+    // Man.prototype.createHead = function () {
+    //     alert("男人头部已经创建好");
+    // }
+    // var man1=new Man('liang');
+    // var woman1=new Woman('zhang');
+    // //判断是否实现
+    // People.ensureImplements(People,[man1, man1]);
+
+
+
+
+
+
+
+
+
+// CompositeImpl.prototype.add = function (obj) {
+//         console.log('add...');
+//     }
+//     CompositeImpl.prototype.remove = function (obj) {
+//         console.log('remove..');
+//     }
+//     CompositeImpl.prototype.update = function (obj) {
+//         console.log('update..');
+//     }
+//     CompositeImpl.prototype.select = function (obj) {
+//         console.log('select...');
+//     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // var CompositeImpl = function () {
+    //     this.implementsInterfaces = ['Composite', 'FormItem'];
+    // }
+    // CompositeImpl.prototype.add = function (obj) {
+    //     console.log('add...');
+
+    // }
+    // CompositeImpl.prototype.remove = function (obj) {
+    //     console.log('remove..');
+
+    // }
+    // CompositeImpl.prototype.update = function (obj) {
+    //     console.log('update..');
+
+    // }   
+    // CompositeImpl.prototype.select = function (obj) {
+    //     console.log('select...');
+
+    // }
+    // function CheckCompositeImpl(instance) {
+    //     if (!IsImplements(instance, 'Composite', 'FormItem')) {
+    //         throw new Error('Object does not implement a required interface');
+    //     }
+    // }
+    // function IsImplements(Object) {
+    //     for (var i = 1; i < arguments.length; i++) {
+    //         var interfaceName = arguments[i];
+    //         var interfaceFound = false;
+    //         for (var j = 0; j < object.implementsInterfaces.length; j++) {
+    //             if (object.implementsInterfaces[j] === interfaceName) {
+    //                 interfaceFound = true;
+    //                 break;
+    //             }
+
+    //         }
+    //         if (!interfaceFound) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+    // var c1=new CompositeImpl();
+    // CheckCompositeImpl(c1);
+    // c1.add();
+</script>
+
+</html>

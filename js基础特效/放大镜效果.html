@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .first {
+            width: 400px;
+            height: 400px;
+            border: 1px black solid;
+            position: absolute;
+            left: 80px;
+            top: 80px;
+        }
+
+        .mask {
+            display: none;
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            opacity: .5;
+            position: absolute;
+
+        }
+
+        .firprc {
+            /* margin-left: 25px;
+            margin-top: 25px; */
+            height: 400px;
+            width: 400px;
+
+        }
+
+        .secprc {
+            height: 1220px;
+            width: 1220px;
+            left: 50px;
+            top: 50px;
+            position: absolute;
+
+        }
+
+        .second {
+            overflow: hidden;
+            display: none;
+            width: 600px;
+            height: 600px;
+            border: 1px black solid;
+            position: absolute;
+            left: 500px;
+            top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="first">
+        <div class="mask"></div>
+        <img src="img/阿里云.png" alt="" class="firprc">
+    </div>
+    <div class="second">
+        <img src="img/阿里云.png" alt="" class="secprc">
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        var first = document.querySelector('.first');
+        var mask = document.querySelector('.mask');
+        var second = document.querySelector('.second');
+        var secprc = document.querySelector('.secprc');
+        first.addEventListener('mouseenter', function () {
+            mask.style.display = 'block';
+            second.style.display = 'block';
+        })
+        first.addEventListener('mouseleave', function () {
+            mask.style.display = 'none';
+            second.style.display = 'none';
+        })
+        first.addEventListener('mousemove', function (e) {
+            var x = e.pageX - first.offsetLeft;
+            var y = e.pageY - first.offsetTop;
+            var smallBoxMoveMaxX = first.offsetWidth - mask.offsetWidth;
+            var smallBoxMoveMaxY = first.offsetHeight - mask.offsetHeight;
+            MaskX = x - mask.offsetWidth / 2;
+            MaskY = y - mask.offsetHeight / 2;
+            if (MaskX <= 0) {
+                MaskX = 0;
+            } else if (MaskX >= smallBoxMoveMaxX) {
+                MaskX = smallBoxMoveMaxX;
+            }
+            if (MaskY <= 0) {
+                MaskY = 0;
+            } else if (MaskY >= smallBoxMoveMaxY) {
+                MaskY = smallBoxMoveMaxY;
+            }
+            mask.style.left = MaskX + 'px';
+            mask.style.top = MaskY + 'px';
+            var bigBoxMoveMaxX=second.offsetWidth-secprc.offsetWidth;
+            var bigBoxMoveMaxY=second.offsetHeight-secprc.offsetHeight;
+            secprc.style.left=MaskX/smallBoxMoveMaxX*bigBoxMoveMaxX+'px';
+            secprc.style.top= MaskY/smallBoxMoveMaxY*bigBoxMoveMaxY+'px';
+        })
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // first.addEventListener('mouseover', function () {
+        //     mask.style.display = 'block';
+        //     second.style.display = 'block';
+        // })
+        // first.addEventListener('mouseout', function () {
+        //     mask.style.display = 'none';
+        //     second.style.display = 'none';
+        // })
+        // first.addEventListener('mousemove', function (e) {
+        //     var x = e.pageX - first.offsetLeft;
+        //     var y = e.pageY - first.offsetTop;
+        //     var smallBoxMoveMaxX=first.offsetWidth-mask.offsetWidth;
+        //     var smallBoxMoveMaxY=first.offsetHeight-mask.offsetHeight;
+        //     MaskX = x - mask.offsetWidth / 2;
+        //     MaskY = y - mask.offsetHeight / 2;
+        //     console.log(x,MaskX);
+        //     if (MaskX <= 0) {
+        //         MaskX = 0;
+        //     } else if (MaskX >= smallBoxMoveMaxX) {
+        //         MaskX = smallBoxMoveMaxX;
+        //     }
+        //     if (MaskY <= 0) {
+        //         MaskY = 0;
+        //     } else if (MaskY >= smallBoxMoveMaxY) {
+        //         MaskY = smallBoxMoveMaxY;
+        //     }
+
+        //     mask.style.left = MaskX+ 'px';
+        //     mask.style.top = MaskY + 'px';
+        //     //  小盒子移动的距离/小盒子最大移动距离=大盒子移动的距离/大盒子最大移动距离
+
+        //     var bigBoxMoveMaxX=second.offsetWidth-secprc.offsetWidth;
+        //     var bigBoxMoveMaxY=second.offsetHeight-secprc.offsetHeight;
+        //     secprc.style.left=MaskX/smallBoxMoveMaxX*bigBoxMoveMaxX+'px';
+        //     secprc.style.top= MaskY/smallBoxMoveMaxY*bigBoxMoveMaxY+'px';
+
+        // })
+
+        // first.addEventListener('mousemove', function (e) {
+
+        //     var x = e.pageX - this.offsetLeft;
+        //     var y = e.pageY - this.offsetTop;
+        //     var maskx = x - mask.offsetWidth / 2;
+        //     var masky = y - mask.offsetHeight / 2
+        //     if (maskx <= 0) {
+        //         maskx = 0;
+        //     }
+        //     else if (maskx >= 100) {
+        //         maskx = 100;
+        //     }
+        //     if (masky <= 0) {
+        //         masky = 0;
+        //     }
+        //     else if (masky >= 100) {
+        //         masky = 100;
+        //     }
+        //     mask.style.left = maskx + 'px';
+        //     mask.style.top = masky + 'px';
+        //     var maxmaskx = first.offsetWidth - mask.offsetWidth;
+        //     var maxbigx = second.offsetWidth - secprc.offsetWidth;
+        //     var maxmasky = first.offsetHeight - mask.offsetHeight;
+        //     var maxbigy = second.offsetHeight - secprc.offsetHeight;
+        //     // console.log(maxmask, maxbig);
+        //     var bigx=maskx*maxbigx/maxmaskx;
+        //     var bigy=masky*maxbigy/maxmasky;
+        //     secprc.style.left=bigx+'px';
+        //     secprc.style.top=bigy+'px';
+        // })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

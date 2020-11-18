@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 超小屏幕下 小于768 布局容器的宽度为100% */
+        @media (max-width: 767px) {
+            .container {
+                width: 100%;
+            }
+        }
+
+        /* 小屏幕下 大于等于768 布局容易改为750px */
+        @media (min-width: 768px) {
+            .container {
+                width: 750px;
+            }
+        }
+
+        /* 中等屏幕下 大于等于992px 布局容易改为970px */
+        @media (min-width: 992px) {
+            .container {
+                width: 970px;
+            }
+        }
+
+        /* 中等屏幕下 大于等于1200px 布局容易改为1170px */
+        @media  (min-width: 1200px) {
+            .container {
+                width: 1170px;
+            }
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            background-color: pink;
+            height: 300px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+</body>
+
+</html>

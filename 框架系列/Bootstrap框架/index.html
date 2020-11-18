@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+  <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+  <style>
+    /* [class^='col'] {
+      border: 1px solid black;
+    } */
+
+    .row>div {
+      background-color: pink;
+      height: 50px;
+    }
+
+    .lunbot {
+      width: 500px;
+      height: 500px;
+    }
+    .btn-default{
+      background-color: blueviolet;
+    }
+    button:hover{
+      background-color: pink!important;
+    }
+    button:visited{
+      background-color: red!important;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+  <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+  <!-- bootstrap引入grid布局*********************************************************************** -->
+  <div class="container">
+    <!-- <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">1</div>
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">2</div>
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">3</div>
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">4</div>
+    </div> -->
+    <!-- 嵌套 -->
+    <!-- <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">1</div>
+          <div class="col-md-6">2</div>
+        </div>
+      </div>
+      <div class="col-md-4">2</div>
+      <div class="col-md-4">3</div> -->
+    <!-- 偏移 相当于加了个左边距-->
+    <!-- <div class="row">
+      <div class="col-md-4 col-md-offset-4"></div>
+      <div class="col-md-4"></div>
+    </div> -->
+    <div class="row">
+      <div class="col-xs-3">1</div>
+      <!-- 只在中等频幕下隐藏 -->
+      <div class="col-xs-3 hidden-md">2</div>
+      <!-- 只在中等频幕下显示 -->
+      <div class="col-xs-3 visible-md">3</div>
+      <div class="col-xs-3">4</div>
+    </div>
+  </div>
+  </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div></div>
+</body>
+</html>

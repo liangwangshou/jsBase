@@ -1,0 +1,48 @@
+@import "base";
+
+.father,
+.mother {
+  border: {
+    style: solid;
+    width: 1px;
+    color: black;
+  }
+  $width: 200px;
+  $height: 200px;
+  width: $width;
+  height: $height;
+  .children {
+    background-color: palevioletred;
+  }
+}
+@mixin a-hover-style($color, $hover, $visited) {
+  color: $color;
+  &:hover {
+    color: $hover;
+  }
+  &:active {
+    color: $visited;
+  }
+}
+
+%a {
+  @include a-hover-style(black, red, skyblue);
+}
+.father a {
+  @extend %a;
+}
+ul {
+  li {
+    font-size: larger;
+    cursor: pointer;
+    @extend %a;
+  }
+}
+%message-shared {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+.message {
+  @extend %message-shared;
+}

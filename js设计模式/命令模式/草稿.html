@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="mydiv"></div>
+</body>
+<script>
+    var Cursor = function (width, height, parent) {
+        this.width = width;
+        this.height = height;
+        this.stack = [];
+        this.canvas = document.createElement('canvas');
+       this.canvas.width = this.width;
+        this.canvas.height = this.height;
+       parent.appendChild(this.canvas);
+        this.ctx = this.canvas.getContext('2d');
+        this.ctx.strokeStyle = 'red';
+         this.move(0, 0);
+    }
+    Cursor.prototype = {
+        constructor: Cursor,
+        move: function (x, y) {
+            var that = this;
+            this.stack.push(function () { that.lineto(x, y) });
+            this.execute();
+        },
+        lineto: function (x, y) {
+            this.x += x;
+            this.y += y;
+            this.ctx.lineTo(this.x, this.y)
+        },
+        execute: function () {
+            this.x = this.width / 2;
+            this.y = this.height / 2;
+            this.ctx.clearRect(0, 0, this.width, this.height);
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.x, this.y);
+            for (var i = 0; i < this.stack.length; i++) {
+                this.stack[i]();
+            }
+            this.ctx.stroke();
+        },
+        undo: function () {
+            this.stack.pop();
+            this.execute();
+        }
+    };
+    var Moveup = function (cursor) {
+        this.cursor = cursor;
+    };
+    Moveup.prototype = {
+        constructor: Moveup,
+        moveup: function () {
+            this.cursor.move(0, -10);
+        },
+        movedown: function () {
+            this.cursor.move(0, 10);
+        },
+        moveright: function () {
+            this.cursor.move(10, 0);
+        },
+        moveleft: function () {
+            this.cursor.move(-10, 0);
+        }
+        
+    };
+    // var Movedown = function (cursor) {
+    //     this.cursor = cursor;
+    // };
+    // Movedown.prototype = {
+    //     constructor: Movedown,
+    //     movedown: function () {
+    //         this.cursor.move(0, 10);
+    //     },
+    //     undo: function () {
+    //         this.cursor.undo();
+    //     }
+    // };
+    // var Moveleft = function (cursor) {
+    //     this.cursor = cursor;
+    // };
+    // Moveleft.prototype = {
+    //     constructor: Moveleft,
+    //     moveleft: function () {
+    //         this.cursor.move(-10, 0);
+    //     },
+    //     undo: function () {
+    //         this.cursor.undo();
+    //     }
+    // };
+    // var Moveright = function (cursor) {
+    //     this.cursor = cursor;
+    // };
+    // Moveright.prototype = {
+    //     constructor: Moveright,
+    //     moveright: function () {
+    //         this.cursor.move(10, 0);
+    //     },
+    //     undo: function () {
+    //         this.cursor.undo();
+    //     }
+    // };
+    var Upbtn = function (label, parent, command) {
+        this.btn = document.createElement('button');
+        this.btn.innerHTML = label;
+        this.btn.onclick = function () {
+            command.moveup();
+        }
+        parent.appendChild(this.btn);
+    };
+    var Downbtn = function (label, parent, command) {
+        this.btn = document.createElement('button');
+        this.btn.innerHTML = label;
+        this.btn.onclick = function () {
+            command.movedown();
+        }
+        parent.appendChild(this.btn);
+    };
+    var Leftbtn = function (label, parent, command) {
+        this.btn = document.createElement('button');
+        this.btn.innerHTML = label;
+        this.btn.onclick = function () {
+            command.moveleft();
+        }
+        parent.appendChild(this.btn);
+    };
+    var Rightbtn = function (label, parent, command) {
+        this.btn = document.createElement('button');
+        this.btn.innerHTML = label;
+        this.btn.onclick = function () {
+            command.moveright();
+        }
+        parent.appendChild(this.btn);
+    };
+    var Undobtn = function (label, parent, cursor) {
+        this.btn = document.createElement('button');
+        this.btn.innerHTML = label;
+        this.btn.onclick = function () {
+            cursor.undo();
+        }
+        parent.appendChild(this.btn);
+    };
+    var mydiv = document.getElementById('mydiv');
+    var curson = new Cursor(200, 200, mydiv);
+    var up = new Moveup(curson);
+    // var down = new Movedown(curson);
+    // var left = new Moveleft(curson);
+    // var right = new Moveright(curson);
+    var uup = new Upbtn('up', mydiv, up);
+    var ddown = new Downbtn('down', mydiv, up);
+    var lleft = new Leftbtn('left', mydiv, up);
+    var rright = new Rightbtn('right', mydiv, up);
+    var unundo = new Undobtn('undo', mydiv, curson);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // var Moveup = function (cursor) {
+    //     this.cursor = cursor;
+    // };
+    // Moveup.prototype = {
+    //     constructor: Moveup,
+    //     execute: function () {
+    //         this.cursor.move(0, -10)
+    //     }
+    // };
+    // var Cursor = function (width, height, parent) {
+    //     this.width = width;
+    //     this.height = height;
+
+    //     this.commandStack = [];
+
+    //     this.element = document.createElement('canvas');
+    //     parent.appendChild(this.element);
+    //     this.ctx = this.element.getContext('2d');
+    //     this.ctx.strokeStyle = 'red';
+    //     this.ctx.width = this.width;
+    //     this.ctx.height = this.height;
+    //     this.move(0, 0);
+    // };
+    // Cursor.prototype = {
+    //     constructor: Cursor,
+    //     move: function (x, y) {
+    //         var that = this;
+
+    //         this.commandStack.push(function () { that.lineTo(x, y); });
+    //         this.executeCommand();
+    //     },
+    //     lineTo: function (x, y) {
+    //         this.x += x;
+    //         this.y += y;
+    //         this.ctx.lineTo(this.x, this.y)
+    //     },
+    //     executeCommand: function () {
+    //         this.x = this.width / 2;
+    //         this.y = this.height / 2;
+    //         this.ctx.clearRect(0, 0, this.width, this.height);
+    //         this.ctx.beginPath();
+    //         this.ctx.moveTo(this.x, this.y);
+    //         for (var i = 0; i < this.commandStack.length; i++) {
+    //             this.commandStack[i]();
+    //         };
+    //         this.ctx.stroke();
+    //     },
+    //     undo: function () {
+    //         this.commandStack.pop();
+    //         this.executeCommand();
+    //     }
+    // };
+
+    // var Movebtn = function (label, parent, command) {
+    //     this.command = command;
+    //     var that = this;
+    //     this.btn = document.createElement('button');
+    //     this.btn.innerHTML = label;
+    //     parent.appendChild(this.btn);
+    //     this.btn.onclick = function () {
+    //         that.command.execute();
+    //     }
+    // };
+    // var undobtn = function (label, parent, cursor) {
+
+    //     this.btn = document.createElement('button');
+    //     this.btn.innerHTML = label;
+    //     parent.appendChild(this.btn);
+    //     this.btn.onclick = function () {
+    //         cursor.undo();
+    //     }
+    // }
+    // var mydiv = document.getElementById('mydiv');
+    // var curson = new Cursor(200, 200, mydiv);
+    // var Up = new Moveup(curson);
+    // var btnUp = new Movebtn('Up', mydiv, Up);
+    // var unbtn = new undobtn('undo', mydiv, curson);
+</script>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bar {
+            height: 100px;
+            width: 80px;
+            background-color: pink;
+            position: absolute;
+            right: 0;
+            top: 300px;
+        }
+
+        .first {
+            height: 200px;
+            background-color: yellowgreen;
+            width: 1400px;
+        }
+
+        .second {
+            height: 400px;
+            background-color: blueviolet;
+            width: 1400px;
+        }
+
+        .third {
+            height: 1500px;
+            background-color: cornflowerblue;
+            width: 1400px;
+        }
+
+        span {
+            display: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bar">
+        <span>返回顶部</span>
+    </div>
+    <div class="first"></div>
+    <div class="second"></div>
+    <div class="third"></div>
+</body>
+<script>
+    var bar = document.querySelector('.bar');
+    var first = document.querySelector('.first');
+    var second = document.querySelector('.second');
+    var third = document.querySelector('.third');
+    var firsttop = second.offsetTop;
+    var minus = bar.offsetTop - firsttop;
+    var third = document.querySelector('.third');
+    var span = document.querySelector('span');
+    document.addEventListener('scroll', function () {
+        // if (window.pageYOffset > bar.offsetTop) {
+        //     bar.style.position = 'fixed';
+        //     bar.style.top = 0 + 'px';
+        // }
+        // if (window.pageYOffset < 300) {
+        //     bar.style.position = 'absolute';
+        //     bar.style.top = '300px';
+        // }
+        if (window.pageYOffset >= firsttop) {
+            bar.style.position = 'fixed';
+            bar.style.top = minus + 'px';
+        } else {
+            bar.style.position = 'absolute';
+            bar.style.top = '300px';
+        }
+        
+    })
+   // document.addEventListener('scroll', function () {
+    //     if (window.pageYOffset >= firsttop) {
+    //         bar.style.position = 'fixed';
+    //         bar.style.top = minus + 'px';
+    //     } else {
+    //         bar.style.position = 'absulote';
+    //         bar.style.top = '300px';
+    //     }
+
+    //     if (window.pageYOffset >= third.offsetTop) {
+    //         span.style.display = 'block';
+    //     } else {
+    //         span.style.display = 'none';
+    //     }
+    // })
+    // span.addEventListener('click', function () {
+    //     move(window, 0);
+    // })
+    // var move = function (obj, target, callback) {
+    //     clearInterval(obj.time);
+    //     obj.time = setInterval(function () {
+
+    //         if (obj.pageYOffset === target) {
+    //             clearInterval(obj.time);
+    //             if (callback) {
+    //                 callback();
+    //             }
+    //         }
+    //         var step = (target - obj.pageYOffset) / 10;
+    //         step = step > 0 ? Math.ceil(step) : Math.floor(step);
+    //         window.scroll(0, step+window.pageYOffset);
+
+    //     }, 25)
+    // }
+</script>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .whole {
+            width: 400px;
+            height: 500px;
+            border: black 1px solid;
+            position: absolute;
+            left: 50px;
+            overflow: hidden;
+            /*  */
+        }
+
+
+        .lunbotu {
+            display: flex;
+            width: 2000px;
+            border: solid 1px black;
+            position: absolute;
+            top: 50px;
+            left: -400px;
+
+        }
+
+        .lunbotu img {
+            height: 350px;
+            width: 400px;
+        }
+
+        .stars {
+            display: flex;
+            position: absolute;
+            left: 34%;
+            bottom: 5%;
+            justify-content: center;
+        }
+
+        .stars li {
+            border-radius: 35%;
+            background-color: grey;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 3ms;
+        }
+
+        li {
+            list-style-type: none;
+
+        }
+
+        .current {
+
+            background-color: orangered !important;
+            width: 50px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="whole">
+        <ul class="lunbotu">
+            <li><img src="img/b3.png" alt=""> </li>
+            <li><img src="img/b1.png" alt=""> </li>
+            <li><img src="img/b2.png" alt=""> </li>
+            <li><img src="img/b3.png" alt=""> </li>
+            <li><img src="img/b1.png" alt=""> </li>
+        </ul>
+        <ul class="stars">
+            <li class="current"></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+<script>
+    // var whole = document.querySelector('.whole');
+    // var imgs = document.querySelectorAll('img');
+    // var starsUl = document.querySelector('.stars');
+    // var lunbotuUl = document.querySelector('.lunbotu');
+    // var lis = document.querySelectorAll('li');
+    // var index = 0;
+    // var circle = 0;
+    // var w = lunbotuUl.children[0].offsetWidth;
+    // var move = function (obj, target) {
+    //     clearInterval(obj.timer);
+    //     obj.timer = setInterval(function () {
+    //         if (target == obj.offsetLeft) {
+    //             clearInterval(obj.timer);
+    //         }
+    //         var step = (target - obj.offsetLeft) / 10;
+    //         step = step > 0 ? Math.ceil(step) : Math.floor(step);
+    //         obj.style.left = step + obj.offsetLeft + 'px';
+    //     }, 35)
+
+    // }
+    // var timer = setInterval(function () {
+    //     if (index == lunbotuUl.children.length - 2) {
+    //         index = 0;
+    //         lunbotuUl.style.left = -(index + 1) * w + 'px';
+    //     }
+    //     else if (index < 0) {
+    //         index = 2;
+    //         lunbotuUl.style.left = -(index + 1) * w + 'px';
+    //     }
+    //     index++;
+    //     circle++;
+    //     if (circle >= 3) {
+    //         circle = 0;
+    //     }
+    //     starsUl.querySelector('.current').classList.remove('current');
+    //     starsUl.children[circle].classList.add('current');
+    //     move(lunbotuUl, -(index + 1) * w);
+    // }, 2000);
+    // var x;
+    // var movex;
+    // lunbotuUl.addEventListener('touchstart', function (e) {
+    //     x = e.targetTouches[0].pageX;
+    //     clearInterval(timer);
+    // })
+    // lunbotuUl.addEventListener('touchmove', function (e) {
+    //     movex = e.targetTouches[0].pageX - x;
+    //     lunbotuUl.style.left = movex - (index + 1) * w + 'px';
+    //     e.preventDefault();
+    // })
+    // lunbotuUl.addEventListener('touchend', function (e) {
+    //     if (Math.abs(movex) > 50) {
+    //         if (movex > 0) {
+    //             index--;
+    //             circle--;
+    //             if (circle < 0) {
+    //                 circle = 2;
+    //             }
+    //         } else {
+    //             index++;
+    //             circle++;
+    //         }
+    //     }
+    //     starsUl.querySelector('.current').classList.remove('current');
+    //     starsUl.children[circle].classList.add('current');
+    //     move(lunbotuUl, -(index + 1) * w);
+    //     clearInterval(timer);
+    //     timer = setInterval(function () {
+    //         if (index == lunbotuUl.children.length - 2) {
+    //             lunbotuUl.style.left = '-400px';
+    //             index = 0;
+    //         }
+    //         index++;
+    //         circle++;
+    //         if (circle >= 3) {
+    //             circle = 0;
+    //         }
+    //         starsUl.querySelector('.current').classList.remove('current');
+    //         starsUl.children[circle].classList.add('current');
+    //         move(lunbotuUl, -(index + 1) * w);
+    //     }, 2000);
+    // })
+
+
+
+
+
+
+    window.addEventListener('load', function () {
+        var whole = document.querySelector('.whole');
+        var imgs = document.querySelectorAll('img');
+        var starsUl = document.querySelector('.stars');
+        var lunbotuUl = document.querySelector('.lunbotu');
+        var lis = document.querySelectorAll('li');
+        var index = 0;
+        var w = lunbotuUl.children[0].offsetWidth;
+        var timer = setInterval(function () {
+            index++;
+            var translatex = -index * w;
+            lunbotuUl.style.transition = 'all .3s';
+            lunbotuUl.style.transform = 'translateX(' + translatex + 'px)';
+        }, 2000);
+        lunbotuUl.addEventListener('transitionend', function () {
+            if (index >= 3) {
+                index = 0;
+                lunbotuUl.style.transition = 'none';
+                translatex = -index * w;
+                lunbotuUl.style.transform = 'translateX(' + translatex + 'px)';
+            } else if (index < 0) {
+                index = 2;
+                lunbotuUl.style.transition = 'none';
+                translatex = -index * w;
+                lunbotuUl.style.transform = 'translateX(' + translatex + 'px)';
+            }
+            starsUl.querySelector('.current').classList.remove('current');
+            starsUl.children[index].classList.add('current');
+        })
+        var startx = 0;
+        var movex = 0;
+        var flag = false;
+        lunbotuUl.addEventListener('touchstart', function (e) {
+            startx = e.targetTouches[0].pageX;
+            clearInterval(timer);
+        })
+        lunbotuUl.addEventListener('touchmove', function (e) {
+            movex = e.targetTouches[0].pageX - startx;
+            var translatex = movex - index * w;
+            lunbotuUl.style.transition = 'none';
+            lunbotuUl.style.transform = 'translateX(' + translatex + 'px)';
+            e.preventDefault();
+            flag = true;
+        })
+        lunbotuUl.addEventListener('touchend', function (e) {
+            if (flag) {
+                if (Math.abs(movex) > 80) {
+                    if (movex > 0) {
+                        index--;
+                    } else {
+                        index++;
+                    }
+                }
+                var translatex = -index * w;
+                lunbotuUl.style.transition = 'all .3s';
+                lunbotuUl.style.transform = 'translateX(' + translatex + 'px)';
+            }
+            clearInterval(timer);
+            timer = setInterval(function () {
+                index++;
+                var translatex = -index * w;
+                lunbotuUl.style.transition = 'all .3s';
+                lunbotuUl.style.transform = 'translateX(' + translatex + 'px)';
+            }, 2000);
+        })
+    })
+
+</script>
+
+</html>

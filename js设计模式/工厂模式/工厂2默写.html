@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //     function carshop() { };
+    //     carshop.prototype = {
+    //         constructor: carshop,
+    //         sellcar: function (type) {
+    //             var car;
+    //             switch (type) {
+    //                 case 'benc1': car = new benc1();
+    //                 case 'benc2': car = new benc2();
+    //                 case 'benc3': car = new benc3();
+    //             }
+    //             return car;
+    //         }
+    //     }
+    // function carbase(){};
+    // carbase.prototype={
+    //     constructor:carbase,
+    //     run:function(){
+    //         console.log('run');
+
+    //     },
+    //     start:function(){
+    //         console.log('start');
+
+    //     }
+    // }
+
+
+
+
+    //     function Bencshop() { };
+    //     Bencshop.prototype = {
+    //         constructor: Bencshop,
+    //         sellcar: function (type) {
+    //             var car;
+    //             var types = ['benc1','benc2']
+    //             for (t in types) {
+    //                 if (types[t] === type) {
+    //                     car = Carfactory.createcar(type);
+    //                     return car;
+    //                 }
+    //             }
+    //             if(car===undefined){
+    //                 console.log('没有你要的车');
+
+    //             }
+    //         }
+    //     }
+    //     var Carfactory={
+    //        createcar:function(type){
+    //            var car =eval('new '+type+'()');
+    //            return car;
+    //        }
+    //     }
+    // function basecar(){};
+    // basecar.prototype={
+    //     constructor:basecar,
+    //     run:function(){
+    //         console.log('run');
+
+    //     },
+    //     start:function(){
+    //         console.log('start');
+
+    //     }
+    // }
+    //     function benc1(){};
+    //     benc1.prototype=new basecar();
+    //     benc1.constructor=benc1;
+    //     benc1.prototype.speed=function(){
+    //         console.log('speed 1');
+
+    //     }
+    //     function benc2(){};
+    //     benc2.prototype=new basecar();
+    //     benc2.constructor=benc2;
+    //     benc2.prototype.speed=function(){
+    //         console.log('speed 2');
+
+    //     }
+    //     var car1=new Bencshop();
+    //     var car1fun=car1.sellcar('benc1');
+    //     car1fun.run();
+    //     car1fun.start();
+    //     car1fun.speed();
+    //     var car2=new Bencshop();
+    //     var car2fun=car2.sellcar('benc2');
+    //     car2fun.run();
+    //     car2fun.start();
+    //     car2fun.speed();
+
+    var carshop = function () { };
+    carshop.prototype = {
+        constructor: carshop,
+        sellcar: function (type) {
+            var types = ['benc', 'baoma', 'aodi'];
+            for (t in types) {
+                if (types[t] === type) {
+                    var car = carfactory.makecar(type);
+                }
+            }
+            return car;
+        }
+    }
+
+    var carfactory = {};
+    carfactory.makecar = function (type) {
+        var car = eval('new ' + type + '()');
+        return car;
+    }
+    var carbase = function () { };
+    carbase.prototype = {
+        constructor: carbase,
+        run: function () {
+            console.log('run');
+        },
+        drive: function () {
+            console.log('drive');
+        }
+    }
+    var benc=function(){};
+    benc.prototype=new carbase();
+
+    var client=new carshop();
+    var car=client.sellcar('benc');
+    car.run();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

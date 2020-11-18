@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简约工厂</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // function Carshop() { };
+    // Carshop.prototype = {
+    //     constructor: Carshop,
+    //     sellCar: function (type) {
+    //         this.abstractSellCar(type);
+    //     },
+    //     abstractSellCar: function () {
+    //         throw new Error('this method is abstract...');
+    //     }
+    // }
+    // 奔驰
+    function BencCarshop() { }
+    // BencCarshop.prototype = new Carshop();
+    BencCarshop.prototype = {
+        constructor: BencCarshop,
+        sellCar: function (type) {
+            var car;//声明一个你要买的车
+            var types = ['Benc'];
+            for (t in types) {
+                if (types[t] === type) {
+                    car = carFactory.createCar(type);
+                } else {
+                    console.log('meiyou');
+                }
+            }
+            // var car = carFactory.createCar(type);
+            return car;
+        }
+
+    }
+    // 宝马
+    function BaomCarshop() { }
+    // BmwCarshop.prototype = new Carshop();
+    BaomCarshop.prototype = {
+        constructor: BaomCarshop,
+        sellCar: function (type) {
+            var car;//声明一个你要买的车
+            var types = ['Baom'];
+            for (t in types) {
+                if (types[t] === type) {
+                    car = carFactory.createCar(type);
+                } else {
+                    console.log('meiyou');
+                }
+            }
+            return car;
+        }
+    }
+    var carFactory = {
+        createCar: function (type) {
+            // 相当于var car = new Benc();  但是他是动态的
+            var car = eval('new ' + type + '()');
+            return car;
+        },
+        
+        
+    }
+    function BaseCar() { };
+    BaseCar.prototype = {
+        constructor: BaseCar,
+        start: function () {
+            console.log('start');
+        },
+        run: function () {
+            console.log('run');
+        }
+    }
+    function Benc() { };
+    Benc.prototype = new BaseCar();
+    Benc.prototype.constructor = Benc;
+    Benc.prototype.drive = function () {
+        console.log('drive');
+    }
+    function Baom() { };
+    Baom.prototype = new BaseCar();
+    Baom.prototype.constructor = Baom;
+    Baom.prototype.drive = function () {
+        console.log('drive');
+    }
+    function Aodi() { };
+    Aodi.prototype = new BaseCar();
+    Aodi.prototype.constructor = Aodi;
+    Aodi.prototype.drive = function () {
+        console.log('drive');
+    }
+    var shop1 = new BencCarshop();
+    var car1 = shop1.sellCar('Benc');
+    car1.run();
+    var shop2 = new BaomCarshop();
+    var car2 = shop2.sellCar('Baom');
+    car2.run();
+
+// console.log(typeof carFactory);
+
+</script>
+
+</html>

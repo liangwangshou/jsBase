@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .whole {
+            width: 600px;
+            height: 500px;
+            border: black 1px solid;
+            position: relative;
+            overflow: hidden;
+            /* background-image: url(img/阿里云.png); */
+        }
+
+        .left {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            top: 35%;
+            left: 0;
+            background-color: hotpink;
+            font-weight: bolder;
+            height: 50px;
+            z-index: 999;
+        }
+
+        .right {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            top: 35%;
+            right: 0;
+            background-color: hotpink;
+            font-weight: bolder;
+            height: 50px;
+            z-index: 999;
+            /* z-index: auto; */
+        }
+
+        .lunbotu {
+            display: flex;
+            width: 2000px;
+            /* border: solid 1px black; */
+            position: absolute;
+            top: 50px;
+            left: 100px;
+
+        }
+
+        .lunbotu img {
+            height: 350px;
+            width: 400px;
+        }
+
+        .lunbotu li {
+            margin-right: 150px;
+        }
+
+        .stars {
+            display: flex;
+            position: absolute;
+            left: 40%;
+            bottom: 5%;
+            justify-content: center;
+        }
+
+        .stars li {
+            border-radius: 50%;
+            background-color: grey;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin-left: 10px;
+
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .current {
+
+            background-color: orangered !important;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="whole">
+        <div class="left">&lt;&lt;&lt;</div>
+        <div class="right">&gt;&gt;&gt;</div>
+        <ul class="lunbotu">
+            <li><img src="img/b1.png" alt=""> </li>
+            <li><img src="img/b2.png" alt=""> </li>
+            <li><img src="img/b3.png" alt=""> </li>
+            <li><img src="img/阿里云.png" alt=""> </li>
+        </ul>
+        <ul class="stars">
+
+        </ul>
+    </div>
+</body>
+<script>
+    // var left_ = document.querySelector('.left');
+    // var right_ = document.querySelector('.right');
+    // var whole = document.querySelector('.whole');
+    // var imgs = document.querySelectorAll('img');
+    // var starsUl = document.querySelector('.stars');
+    // var lunbotuUl = document.querySelector('.lunbotu');
+    // var num = 0;
+    // var circle = 0;
+    // whole.addEventListener('mouseenter', function () {
+    //     left_.style.display = 'block';
+    //     right_.style.display = 'block'
+    // })
+    // whole.addEventListener('mouseleave', function () {
+    //     left_.style.display = 'none';
+    //     right_.style.display = 'none'
+    // })
+    // var clearAll = function () {
+    //     for (var j = 0; j < starsUl.children.length; j++) {
+    //         starsUl.children[j].className = ''
+    //     }
+
+    // }
+    // var move = function (obj, target, callback) {
+    //     clearInterval(obj.time);
+    //     obj.time = setInterval(function () {
+    //         if (obj.offsetLeft == target) {
+    //             clearInterval(obj.time);
+    //             if (callback) {
+    //                 callback();
+    //             }
+    //         }
+    //         var step = (target - obj.offsetLeft) / 10
+    //         step = step > 0 ? Math.ceil(step) : Math.floor(step);
+    //         obj.style.left = step + obj.offsetLeft + 'px';
+    //     }, 50)
+    // }
+    // for (var i = 0; i < lunbotuUl.children.length; i++) {
+    //     var li = document.createElement('li');
+    //     starsUl.appendChild(li);
+    //     starsUl.children[0].className = 'current';
+    //     starsUl.children[i].index = i;
+    //     starsUl.children[i].addEventListener('click', function () {
+    //         clearAll(); this.className = 'current';
+    //         var target = this.index * (-550) + 100;
+    //         num = circle = this.index;
+    //         move(lunbotuUl, target);
+    //     })
+    // }
+    // var first = lunbotuUl.children[0].cloneNode(true);
+    // lunbotuUl.appendChild(first);
+    // right_.addEventListener('click', function () {
+
+    //     if (num == lunbotuUl.children.length - 1) {
+    //         lunbotuUl.style.left = '100px';
+    //         num = 0;
+    //     }
+    //     num++;
+    //     circle++;
+    //     if (circle == starsUl.children.length) {
+    //         circle = 0;
+    //     }
+    //     clearAll();
+    //     starsUl.children[circle].className = 'current';
+    //     move(lunbotuUl, num * (-550) + 100);
+
+    // })
+    // left_.addEventListener('click', function () {
+    //     if(num==0){
+    //         num=lunbotuUl.children.length-1;
+    //         lunbotuUl.style.left = num * (-550)+100 +'px';
+    //     }
+    //     num--;
+    //     if(circle==0){
+    //         circle=lunbotuUl.children.length-1;
+    //     }
+    //     circle--;
+    //     var target = num * (-550) + 100;
+    //     move(lunbotuUl, target, function () { })
+    //     for (var j = 0; j < lunbotuUl.children.length-1; j++) {
+    //         starsUl.children[j].className = '';
+    //     }
+    //     starsUl.children[circle].className = 'current';
+    // })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var left_ = document.querySelector('.left');
+    var right_ = document.querySelector('.right');
+    var whole = document.querySelector('.whole');
+    var imgs = document.querySelectorAll('img');
+    var starsUl = document.querySelector('.stars');
+    var lunbotuUl = document.querySelector('.lunbotu');
+    var num = 0;
+    var circle = 0;
+    var backgroundImgArray=['img/b1.png','img/b2.png','img/b3.png','img/阿里云.png'];
+    whole.addEventListener('mouseenter', function () {
+        left_.style.display = 'block';
+        right_.style.display = 'block';
+
+    })
+    whole.addEventListener('mouseleave', function () {
+        left_.style.display = 'none';
+        right_.style.display = 'none';
+
+    })
+    var move = function (obj, target, callback) {
+        clearInterval(obj.time);
+        obj.time = setInterval(function () {
+            if (obj.offsetLeft == target) {
+                clearInterval(obj.time);
+                if (callback) {
+                    callback();
+                }
+            }
+            var step = (target - obj.offsetLeft) / 10
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            obj.style.left = step + obj.offsetLeft + 'px';
+        }, 5)
+    }
+    for (var i = 0; i < lunbotuUl.children.length; i++) {
+        var li = document.createElement('li');
+        li.index = i;
+        starsUl.appendChild(li);
+        starsUl.children[0].className = 'current';
+        starsUl.children[i].addEventListener('click', function () {
+            for (var j = 0; j < starsUl.children.length; j++) {
+                starsUl.children[j].className = '';
+            }
+            this.className = 'current';
+           whole.style.backgroundImage= 'url('+backgroundImgArray[this.index]+')';
+           console.log( whole.backgroundImage);
+            num=circle=this.index;
+            var target = this.index * (-550) + 100;
+            move(lunbotuUl, target, function () { })
+        })
+
+    }
+    var first = lunbotuUl.children[0].cloneNode(true);
+    lunbotuUl.appendChild(first);
+    var flag=true;
+    right_.addEventListener('click', function () {
+       if(flag){
+           flag=false;
+           if (num == lunbotuUl.children.length - 1) {
+            lunbotuUl.style.left = '100px';
+            num = 0;
+        }
+        num++;
+        circle++;
+        if (circle == lunbotuUl.children.length - 1) {
+            circle = 0
+        }
+        var target = num * (-550) + 100;
+        move(lunbotuUl, target, function () { 
+            flag=true
+        })
+        for (var j = 0; j < lunbotuUl.children.length - 1; j++) {
+            starsUl.children[j].className = '';
+        }
+        starsUl.children[circle].className = 'current';
+       }
+    })
+    left_.addEventListener('click', function () {
+        if(num==0){
+            num=lunbotuUl.children.length-1;
+            lunbotuUl.style.left = num * (-550)+100 +'px';
+        }
+        num--;
+        if(circle==0){
+            circle=lunbotuUl.children.length-1;
+        }
+        circle--;
+        var target = num * (-550) + 100;
+        move(lunbotuUl, target, function () { })
+        for (var j = 0; j < lunbotuUl.children.length-1; j++) {
+            starsUl.children[j].className = '';
+        }
+        starsUl.children[circle].className = 'current';
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     var move = function (obj, target, callback) {
+//         clearInterval(obj.time);
+//         obj.time = setInterval(function () {
+//             if (obj.offsetLeft == target) {
+//                 clearInterval(obj.time);
+//                 if (callback) {
+//                     callback();
+//                 }
+//             }
+//             var step = (target - obj.offsetLeft) / 10;
+//             step = step > 0 ? Math.ceil(step) : Math.floor(step);
+//             obj.style.left = step + obj.offsetLeft + 'px';
+//         }, 35);
+
+//     }
+//     whole.addEventListener('mouseenter', function () {
+//         left_.style.display = 'block';
+//         right_.style.display = 'block';
+//     })
+//     whole.addEventListener('mouseleave', function () {
+//         left_.style.display = 'none';
+//         right_.style.display = 'none';
+//     })
+//     for (var i = 0; i < imgs.length; i++) {
+//         var li = document.createElement('li');
+//         li.index = i;
+
+//         starsUl.appendChild(li);
+//         li.addEventListener('click', function () {
+//             for (var j = 0; j < imgs.length; j++) {
+//                 starsUl.children[j].className = '';
+//             }
+//             this.className = 'current';
+//              num=this.index;
+//              circle= this.index;
+//             var target = this.index * (-550) + 100;
+//             move(lunbotuUl, target, function () { });
+//         })
+//     }
+//    starsUl.children[0].className = 'current';
+
+//     var first = lunbotuUl.children[0].cloneNode(true);
+//     lunbotuUl.appendChild(first);
+//     left_.addEventListener('click', function () {
+//         if (num==0) {
+//             num = lunbotuUl.children.length-1;
+//             lunbotuUl.style.left = num * (-550)+100 +'px';
+//         }
+//         num--;
+//         var target = num * (-550) + 100;
+//         move(lunbotuUl, target, function () { })
+//         circle--;
+//         if(circle<0){
+//             circle=2;
+//         }
+//         for (var i = 0; i < imgs.length; i++) {
+//             starsUl.children[i].className = '';
+//         }
+//         starsUl.children[circle].className = 'current';
+//     })
+//     right_.addEventListener('click', function () {
+//         if (lunbotuUl.children.length - 1 == num) {
+//             lunbotuUl.style.left = '100px';
+//             num = 0;
+//         }
+//         num++;
+//         var target = num * (-550) + 100;
+//         move(lunbotuUl, target, function () { })
+//         circle++;
+//        if(circle==lunbotuUl.children.length-1){
+//             circle=0;
+//         }
+//         for (var i = 0; i < imgs.length; i++) {
+//             starsUl.children[i].className = '';
+//         }
+//         starsUl.children[circle].className = 'current';
+//     })
+</script>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <span class="day">1</span>
+    <span class="hour">2</span>
+    <span class="minute">3</span>
+    <span class="second">4</span>
+    <script>
+        var day = document.querySelector('.day');
+        var hour = document.querySelector('.hour');
+        var minute = document.querySelector('.minute');
+        var second = document.querySelector('.second');
+        var inputTime = new Date('2021-9-27 4:00:00');
+        update();
+        // setInterval(update, 1000);
+
+        function update() {
+            var newtime = new Date();
+            var nowTime = Date.now()
+            alert(nowTime);
+            var times = (inputTime - newtime) / 1000;
+            var d = parseInt(times / 60 / 60 / 24);
+            var h = parseInt(times / 60 / 60) - d * 24;
+            var m = parseInt(times / 60) - d * 24 * 60 - h * 60;
+            var s = parseInt(times - d * 24 * 3600 - h * 3600 - m * 60);
+            d = d < 10 ? '0' + d : d;
+            day.innerHTML = d + '天';
+            h = h < 10 ? '0' + h : h;
+            hour.innerHTML = h + '小时';
+            m = m < 10 ? '0' + m : m;
+            minute.innerHTML = m + '分钟';
+            s = s < 10 ? '0' + s : s;
+            second.innerHTML = s + '秒';
+        }
+    </script>
+</body>
+
+
+</html>

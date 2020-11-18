@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var BencShop = function () { }
+    BencShop.prototype = {
+        constructor: BencShop,
+        shop: function (type) {
+            var newcar = carfactory.produce(type);
+            return newcar;
+        }
+    };
+    var carfactory = {
+        produce: function (type) {
+            var car = eval('new ' + type + '()');
+            return car;
+        }
+    };
+    var bencbase = function () { };
+    bencbase.prototype = {
+        constructor: bencbase,
+        run: function () {
+            console.log('fun');
+
+        },
+        stop: function () {
+            console.log('stop');
+
+        }
+    };
+var base1=function(){};
+base1.prototype=new bencbase();
+base1.prototype.fly=function(){
+    console.log('fly');
+    
+};
+var shop=new BencShop();
+var car1=shop.shop('base1');
+car1.run();
+
+</script>
+
+</html>

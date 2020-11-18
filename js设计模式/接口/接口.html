@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var Interface = function (name, methods) {
+        if (arguments.length != 2) {
+            alert('必须是两个参数');
+        }
+        this.name = name;
+        this.methods = [];
+        for (var i = 0, len = methods.length; i < len; i++) {
+            if (typeof methods[i] !== String) {
+                alert('必须是字符型');
+            }
+            this.methods.push(methods[i]);
+        }console.log(this.methods);
+    }
+
+    // 二  准备工作
+    // 1 实例化接口对象
+    var CompositeInterface = new Interface('CompositeInterface', ['add', 'remove']);
+    var FormItemInterface = new Interface('FormItemInterface', ['update', 'select']);
+    // 2 具体得实现类
+    // CompositeImpl implements CompositeInterface,FormItemInterface
+    var CompositeImpl = function () { };
+    // 3 实现接口的方法inplements methods
+    CompositeImpl.prototype.add = function (obj) {
+        console.log('add...');
+    }
+    CompositeImpl.prototype.remove = function (obj) {
+        console.log('remove..');
+    }
+    CompositeImpl.prototype.update = function (obj) {
+        console.log('update..');
+    }
+    CompositeImpl.prototype.select = function (obj) {
+        console.log('select...');
+    }
+
+    // 三 检验接口里的方法
+
+    Interface.ensureImplements = function (object) {
+
+        if (arguments.length < 2) {
+            console.log('000');
+
+        }
+        //获得接口实例对象
+        for (var i = 1, len = arguments.length; i < len; i++) {
+            var instanceInterface = arguments[i];
+            // // 判断参数是否是接口类的类型
+            // if (instanceInterface.constructor !== Interface) {
+            //     console.log('不是');
+
+            // }
+
+            // 循环接口实例对象里面的每一个方法
+            for (var j = 0; j < instanceInterface.methods.length; j++) {
+                // 用一个临时变量 接受每一个方法的名字（注意是字符串）
+                var methodName = instanceInterface.methods[j];
+                //object[key]就是方法
+                if (!object[methodName] || typeof object[methodName] !== 'function') {
+                    console.log('the method name' + methodName + 'is not found!');
+
+                }
+            }
+
+        }
+    }
+    var c1 = new CompositeImpl();
+    Interface.ensureImplements(c1, CompositeInterface, FormItemInterface);
+    c1.add();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // var CompositeImpl = function () {
+    //     this.implementsInterfaces = ['Composite', 'FormItem'];
+    // }
+    // CompositeImpl.prototype.add = function (obj) {
+    //     console.log('add...');
+
+    // }
+    // CompositeImpl.prototype.remove = function (obj) {
+    //     console.log('remove..');
+
+    // }
+    // CompositeImpl.prototype.update = function (obj) {
+    //     console.log('update..');
+
+    // }   
+    // CompositeImpl.prototype.select = function (obj) {
+    //     console.log('select...');
+
+    // }
+    // function CheckCompositeImpl(instance) {
+    //     if (!IsImplements(instance, 'Composite', 'FormItem')) {
+    //         throw new Error('Object does not implement a required interface');
+    //     }
+    // }
+    // function IsImplements(Object) {
+    //     for (var i = 1; i < arguments.length; i++) {
+    //         var interfaceName = arguments[i];
+    //         var interfaceFound = false;
+    //         for (var j = 0; j < object.implementsInterfaces.length; j++) {
+    //             if (object.implementsInterfaces[j] === interfaceName) {
+    //                 interfaceFound = true;
+    //                 break;
+    //             }
+
+    //         }
+    //         if (!interfaceFound) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+    // var c1=new CompositeImpl();
+    // CheckCompositeImpl(c1);
+    // c1.add();
+</script>
+
+</html>

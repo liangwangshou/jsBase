@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  var a = function (array) {
+    this.array = array;
+    var student = {
+      name: 'zahngsa',
+      sex: 'nan',
+      age: '22'
+    }
+    for (var t in student) {
+      this.array.push(student[t]);
+      //   console.log(t);
+    }
+   console.log(this);
+  }
+  var undostack = [];
+  var instancea = new a(undostack);
+  console.log(undostack);
+</script>
+
+</html>

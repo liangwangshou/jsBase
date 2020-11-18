@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+.father,
+.mother {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  width: 200px;
+  height: 200px; }
+  .father .children,
+  .mother .children {
+    background-color: palevioletred; }
+
+.father a, ul li {
+  color: black; }
+  .father a:hover, ul li:hover {
+    color: red; }
+  .father a:active, ul li:active {
+    color: skyblue; }
+
+ul li {
+  font-size: larger;
+  cursor: pointer; }
+
+.message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+/*# sourceMappingURL=index.css.map */

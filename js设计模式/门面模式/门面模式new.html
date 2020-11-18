@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="mydiv">123</div>
+</body>
+<script>
+    var classs = function (parent) {
+        var css = {
+            height:'50px',
+            width:'50px',
+            fontSize: '50px',
+            background: 'green'
+        };
+        this.htmldiv=document.createElement('div');
+        this.htmldiv.innerHTML='123';
+        for(var key in css){
+            this.htmldiv.style[key]=css[key];
+        }
+        parent.appendChild(this.htmldiv);
+        console.log(parent);
+        
+    }
+    var mydiv=document.getElementById("mydiv");
+    var a=new classs(mydiv);
+</script>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工厂1</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function Carshop() { };
+    Carshop.prototype = {
+        constructor: Carshop,
+        sellCar: function (type) {
+            // var car;
+            // switch (type) {
+            //     case 'Benc': car = new Benc(); break;
+            //     case 'Baom': car = new Baom(); break;
+            //     case 'Aodi': car = new Aodi(); break;
+            //     default: 'not buy it';
+            // }
+            var car=carFactory.createCar(type);
+            return car;
+        }
+    }
+    var carFactory={
+        createCar:function(type){
+            var car;
+            switch (type) {
+                case 'Benc': car = new Benc(); break;
+                case 'Baom': car = new Baom(); break;
+                case 'Aodi': car = new Aodi(); break;
+                default: 'not buy it';
+            }
+            return car;
+        }
+    }
+    function BaseCar() { };
+    BaseCar.prototype = {
+        constructor: BaseCar,
+        start: function () {
+            console.log('start');
+
+        },
+        run: function () {
+            console.log('run');
+
+        }
+    }
+    function Benc() { };
+    Benc.prototype=new BaseCar();
+    Benc.prototype.constructor=Benc;
+    Benc.prototype.drive=function(){console.log('drive');
+    }
+    // Benc.prototype.start = function () {
+    //     console.log('Benc start');
+    // }
+    // Benc.prototype.run = function () {
+    //     console.log('Benc run');
+    // }
+    function Baom() { };
+    Baom.prototype=new BaseCar();
+    Baom.prototype.constructor=Baom;
+    Baom.prototype.drive=function(){console.log('drive');
+    }
+    // Baom.prototype.start = function () {
+    //     console.log('Baom start');
+    // }
+    // Baom.prototype.run = function () {
+    //     console.log('Baom run');
+    // }
+    function Aodi() { };
+    Aodi.prototype=new BaseCar();
+    Aodi.prototype.constructor=Aodi;
+    Aodi.prototype.drive=function(){console.log('drive');
+    }
+    // Aodi.prototype.start = function () {
+    //     console.log('Aodi start');
+    // }
+    // Aodi.prototype.run = function () {
+    //     console.log('Aodic run');
+    // }
+    var shop = new Carshop();
+    var car1 = shop.sellCar('Benc');
+    car1.start();
+    car1.run();
+    car1.drive();
+    // function Staff(name, money) {
+    //     this.id = '';
+    //     this.name = name;
+    //     this.money = money;
+    // }
+    // Staff.prototype.mon = function () {
+    //     console.log('完成一次工作');
+
+    // }
+    // function Cook(name, money) {
+    //     Staff.call(this, name, money);
+    // }
+    // Cook.prototype=new Staff();
+    // Cook.prototype.constructer=Cook;
+    // Cook.prototype.working = function () {//这里food传的是一个对象
+    //     console.log('cook的工作');
+
+    // }
+    // var cook = new Cook();
+    // console.log(cook.mon());
+
+
+</script>
+
+</html>

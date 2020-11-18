@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+</body>
+
+<script>
+    console.log(location.search);
+    var div = document.querySelector('div');
+    //先去掉问号
+    var params = location.search.substr(1);
+    // console.log(params);
+    //利用等号把字符串分割成数组
+    var arr = params.split('=');
+    div.innerHTML = arr[1];
+</script>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="mydiv" style="width: 800px;height: 800px;border: 2px solid black;"></div>
+</body>
+<script>
+ // 客户 调用者 接收者
+    // 命令对象得类  参数传递得是接受者
+    // 吧命令对象叫做调用者
+    var MoveUp = function (cursor) {
+        this.cursor = cursor;
+    };
+    MoveUp.prototype = {
+        constructor: MoveUp,
+        execute: function () {
+            // 真正得接收者调用自己move得方法
+            this.cursor.move(0, -10)
+        },
+        undo: function () {
+            this.cursor.move(0, 10)
+        }
+    }
+    var MoveDown = function (cursor) {
+        this.cursor = cursor;
+    };
+    MoveDown.prototype = {
+        constructor: MoveDown,
+        execute: function () {
+            // 真正得接收者调用自己move得方法
+            this.cursor.move(0, 10)
+        },
+        undo: function () {
+            this.cursor.move(0, -10)
+        }
+    }
+    var MoveLeft = function (cursor) {
+        this.cursor = cursor;
+    };
+    MoveLeft.prototype = {
+        constructor: MoveLeft,
+        execute: function () {
+            // 真正得接收者调用自己move得方法
+            this.cursor.move(-10, 0)
+        },
+        undo: function () {
+            this.cursor.move(10, 0)
+        }
+    }
+    var MoveRight = function (cursor) {
+        this.cursor = cursor;
+    };
+    MoveRight.prototype = {
+        constructor: MoveRight,
+        execute: function () {
+            // 真正得接收者调用自己move得方法
+            this.cursor.move(10, 0)
+        },
+        undo: function () {
+            this.cursor.move(-10, 0)
+        }
+    }
+    // 接收者  也就是操作具体方法得对象
+
+    var Cursor = function ( parent) {
+       var styleinstance = {
+            width: '100px',
+            height: '100px',
+            position: 'absolute',
+            left: '40px',
+            top: '40px',
+            background: 'black'
+        }
+        this.movediv = document.createElement('div');
+        for (var key in styleinstance) {
+            // console.log(this.movediv.style[key]);
+           this.movediv.style[key] = styleinstance[key];
+        };
+        parent.appendChild(this.movediv);
+    }
+    Cursor.prototype = {
+        constructor: Cursor,
+        move: function (x, y) {
+            this.movediv.style.left=parseInt(this.movediv.style.left)+x+'px';
+           this.movediv.style.top=parseInt(this.movediv.style.top)+y+'px';
+}
+    }
+    // 应该有一个命令集合 目的是当执行每一个命令中，把该命令加入集合中
+    // 命令对象在执行操作之前 应该把命令加入集合中  在原始命令类上加一些新的特性  适合装饰着模式 
+    // 使用装饰着模式 完成这件事情
+    // 当前是一个装饰类 装饰命令对象的实例 两个参数（原始命令对象[被装饰者]，命令集合[数组]）
+    var UndoDercorator = function (command, undoStack) {
+        this.command = command;
+        this.undoStack = undoStack;
+    };
+    UndoDercorator.prototype = {
+        constructor: UndoDercorator,
+        execute: function () {
+            // 在执行真正命令之前 把命令加入集合中
+            this.undoStack.push(this.command);
+            this.command.execute();
+        },
+        undo: function () {
+            this.command.undo();
+        }
+    }
+    // 命令按钮类
+    var CommanButton = function (label, command, parent) {
+        this.element = document.createElement('button');
+        this.element.innerHTML = label;
+        parent.appendChild(this.element);
+        // 添加事件
+        this.element.onclick = function () {
+            command.execute();
+        }
+    }
+    // 回退按钮类
+    var UndoButton = function (label, undoStack, parent) {
+        this.element = document.createElement('button');
+        this.element.innerHTML = label;
+        parent.appendChild(this.element);
+        this.element.onclick = function () {
+            if (undoStack.length == 0) {
+                alert('最后一条命令了');
+                return;
+            }
+            var lastCommand = undoStack.pop();
+            lastCommand.undo();
+
+        }
+    }
+    window.onload = function () {
+        var mydiv = document.getElementById('mydiv');
+        var cursor = new Cursor(mydiv);//接收者对象实例化出来了
+        var undoStack = [];//命令集合
+        var upCommand = new UndoDercorator(new MoveUp(cursor), undoStack);
+        var downCommand = new UndoDercorator(new MoveDown(cursor), undoStack);
+        var leftCommand = new UndoDercorator(new MoveLeft(cursor), undoStack);
+        var rightCommand = new UndoDercorator(new MoveRight(cursor), undoStack);
+
+        var upbtn = new CommanButton('up', upCommand, mydiv);
+        var downbtn = new CommanButton('down', downCommand, mydiv);
+        var leftbtn = new CommanButton('left', leftCommand, mydiv);
+        var rightbtn = new CommanButton('right', rightCommand, mydiv);
+        var undobtn = new UndoButton('undo', undoStack, mydiv);
+    }
+</script>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="div1">div1</div>
+    <div id="div2">div2</div>
+    <div id="div3">div3</div>
+</body>
+<script>
+    // a(['div1', 'div2', 'div3'], {
+    //     color: 'green',
+    //     background: 'blue',
+    //     fontSize: '40px'
+
+    // })
+    // function a(name, object) {
+    //     for (var i in name) {
+    //         for (var t in object) {
+    //             document.getElementById(name[i]).style[t] = object[t];
+    //         }
+    //     }
+    // }
+// function b(name,prop,val){
+//     for(var i in name){
+//         document.getElementById(name[i]).style[prop]=val;
+//     }
+// }
+    // window.onload = function () {
+    //     stylenumber(['div1', 'div2', 'div3'], {
+    //         // color: 'blue',
+    //         fontSize: '50px',
+    //         background: 'green'
+    //     });
+    //     function divnumber(name, prop, val) {
+    //         for (var i = 0; i < name.length; i++) {
+    //             document.getElementById(name[i]).style[prop] = val;
+    //         }
+    //     }
+    //     function stylenumber(name, options) {
+    //         for (var prop in options) {
+    //             divnumber(name, prop, options[prop]);
+    //         }
+    //     }
+    // }
+    set1(['div1', 'div2', 'div3'], {
+        // color: 'blue',
+        fontSize: '50px',
+        background: 'green'
+    });
+    function set1 (name,object){
+        for(var m in name){
+            for(var n in object){
+                document.getElementById(name[m]).style[n]=object[n];
+            }
+        }
+    }
+    // function set1(name, object) {
+    //     for (var t in name) {
+    //         // var car=document.getElementById(name[t]).style[t]=object[t];
+    //         // console.log(car);
+    //         set2(name[t], object);
+
+    //     }
+    // }
+    // function set2(name, object) {
+    //     for (var t in object) {
+    //         document.getElementById(name).style[t] = object[t];
+    //     }
+    // }
+</script>
+
+</html>
+<!-- <html>
+<body>
+<script type="text/javascript">
+var x
+var mycars = {
+    long:'baoma',
+    short:'aodi'
+}
+for (x in mycars)
+{
+document.write(mycars[x] + "<br />");
+console.log(x);
+
+}
+</script>
+</body>
+</html> -->

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var Org = function (name) {
+        this.name = name;
+        this.depts = [];
+    }
+    Org.prototype = {
+        constructor: Org,
+        addDepts: function (child) {
+            this.depts.push(child);
+            return this;
+        },
+        getDepts: function () {
+            return this.depts;
+        }
+    }
+
+
+    var Dept = function (name) {
+        this.name = name;
+        this.persons = [];
+    }
+    Dept.prototype = {
+        constructor: Dept,
+        addpersons: function (child) {
+            this.persons.push(child);
+            return this;
+        },
+        getpersons: function () {
+            return this.persons;
+        }
+    }
+
+
+    var Person = function (name) {
+        this.name = name;
+    }
+    Person.prototype = {
+        constructor: Person,
+        hardworking: function () {
+            console.log(this.name + 'working');
+
+        }
+    }
+    var p1 = new Person('aaa');
+    var p2 = new Person('bbb');
+    var p3 = new Person('ccc');
+    var p4 = new Person('ddd');
+    var p5 = new Person('eee');
+    var p6 = new Person('fff');
+    // console.log(p1);
+
+    var dept1 = new Dept('开发部门');
+    dept1.addpersons(p1).addpersons(p2).addpersons(p3);
+
+    var dept2 = new Dept('销售部门');
+    dept2.addpersons(p4).addpersons(p5).addpersons(p6);;
+    var org = new Org('迪奥');
+    org.addDepts(dept1).addDepts(dept2);
+
+    // console.log(dept1.getpersons());
+
+
+    for (var i = 0, depts = org.getDepts(); i < depts.length; i++) {
+        for (var j = 0, persons = depts[i].getpersons(); j < persons.length; j++) {
+            if (persons[j].name === 'eee') {
+                persons[j].hardworking();
+            }
+            // console.log(persons[j].name);
+
+        }
+        //    console.log(depts[i]);
+
+
+    }
+
+    // }
+    // var son = function (name) {
+    //     this.name = name;
+    // }
+    // var father = function (name) {
+    //     this.name=name;
+    //     this.childs = [];
+    // }
+    // father.prototype.addchild = function (child) {
+    //     this.childs.push(child);
+    // }
+    // father.prototype.getchild = function (child) {
+    //     return this.childs;
+    // }
+    // var son1 = new son('bbbbb');
+    // var father = new father('aaaa');
+    // father.addchild(son1);
+    // console.log(father.getchild());
+
+
+
+
+</script>
+
+</html>

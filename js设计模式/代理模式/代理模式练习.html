@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="mydiv"></div>
+</body>
+<script>
+    var Library = function (books) {
+        this.books = books;
+
+    };
+    Library.prototype = {
+        constructor: Library,
+        addbook: function (newbooks) {
+            for (var t in newbooks) {
+                this.books[t] = newbooks[t];
+            };
+        },
+        findbook: function (id) {
+            for (var key in this.books) {
+                if (this.books[key].id === id) {
+                    return this.books[key].id;
+                }
+            }
+        }
+    };
+    var Proxy = function (books) {
+        this.books = books;
+        this.library = null;
+    };
+    Proxy.prototype = {
+        constructor: Proxy,
+        inicial: function () {
+            if (this.library == null) {
+                this.library = new Library(this.books);
+            }
+        },
+        addbook: function (newbooks) {
+            this.inicial();
+            this.library.addbook(newbooks)
+        },
+        findbook: function (id) {
+            this.inicial();
+            return this.library.findbook(id);
+        }
+    };
+    var Book = function (id, author) {
+        this.id = id;
+        this.author = author;
+    };
+    var Button = function (label, parent, proxyInstance) {
+        this.btn = document.createElement('button');
+        parent.appendChild(this.btn);
+        this.btn.innerHTML = label;
+        if (label === 'add') {
+            this.btn.onclick = function () {
+                proxyInstance.addbook({ js, javascript, ajax })
+                console.log('您已成功添加');
+                
+                // console.log(proxyInstance);
+
+            }
+        };
+        if (label === 'find') {
+            this.btn.onclick = function () {
+                console.log(proxyInstance.findbook('html') + '已经帮您找到');
+            }
+        };
+
+    }
+
+    var js = new Book('js', 'liangyutao');
+    var javascript = new Book('javascript', 'zhangyanling');
+    var html = new Book('html', 'yutao');
+    var css = new Book('css', 'yanling');
+    var ajax = new Book('ajax', 'love');
+
+    var proxy1 = new Proxy({ html, css });
+    // proxy1.addbook({ js, javascript, ajax });
+
+    var mydiv = document.getElementById('mydiv');
+    var addbtn = new Button('add', mydiv, proxy1);
+    var findbtn = new Button('find', mydiv, proxy1);
+    var delbtn = new Button('del', mydiv, proxy1);
+
+</script>
+
+</html>

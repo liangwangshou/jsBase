@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            border: 1px solid black;
+        }
+
+        .wind {
+            background-color: violet;
+            width: 60px;
+            height: 20px;
+            position: absolute;
+            opacity: .5;
+            left: 47px;
+            top: 27px;
+        }
+
+        ul {
+            display: flex;
+
+        }
+
+        li {
+            list-style-type: none;
+            padding: 10px;
+            width: 80px;
+            cursor: pointer;
+            z-index: 99;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="wind"></div>
+        <ul>
+            <li>梁玉涛</li>
+            <li>张研灵</li>
+            <li>辛鹏飞</li>
+            <li>陈安妮</li>
+            <li>尹佳琪</li>
+            <li>冯韦博</li>
+            <li>杨志鹏</li>
+            <li>蔡璐杨</li>
+        </ul>
+    </div>
+</body>
+<script>
+    var wind = document.querySelector('.wind');
+    var lis = document.querySelectorAll('li');
+    var move = function (obj, target, callback) {
+        clearInterval(obj.time);
+        obj.time = setInterval(function () {
+            if (obj.offsetLeft == target) {
+                clearInterval(obj.time);
+            }
+            var step = (target - obj.offsetLeft) / 10;
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            obj.style.left = obj.offsetLeft + step + 'px';
+        }, 35)
+    }
+    var current=0;
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].index = i;
+        lis[i].addEventListener('mouseenter', function () {
+            move(wind, this.offsetLeft);
+        })
+        lis[i].addEventListener('mouseleave', function () {
+            move(wind, current);
+        })
+        lis[i].addEventListener('mousedown',function(){
+            current=this.offsetLeft;
+          
+        })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // var wind = document.querySelector('.wind');
+    // var lis = document.querySelectorAll('li');
+    // var current=47;
+    // var move = function (obj, target, callback) {
+    //     clearInterval(obj.time);
+    //     obj.time = setInterval(function () {
+    //         if (target == obj.offsetLeft) {
+    //             clearInterval(obj.time);
+    //             if (callback) {
+    //                 callback();
+    //             }
+    //         }
+    //         var step = (target - obj.offsetLeft) / 10;
+    //         step = step > 0 ? Math.ceil(step) : Math.floor(step);
+    //         obj.style.left = step + obj.offsetLeft + 'px';
+    //     }, 15)
+    // }
+    // for (var i = 0; i < lis.length; i++) {
+    //     lis[i].addEventListener('mouseenter', function () {
+    //         move(wind, this.offsetLeft);
+    //     });
+    //     lis[i].addEventListener('mouseleave', function () {
+    //         move(wind, current);
+    //     })
+    //     lis[i].addEventListener('click',function(){
+    //         current=this.offsetLeft;
+    //     });
+    // }
+</script>
+
+</html>
